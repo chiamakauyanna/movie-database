@@ -63,17 +63,35 @@ const SearchBar = () => {
       {error && <p>{error}</p>}
 
       {movies.length > 0 && (
-        <ul>
+        <ul className="flex flex-wrap gap-4 justify-center w-screen">
           {movies.map((movie) => (
-            <li key={movie.id}>
-              {movie.original_title}
+            <li key={movie.id}
+              className="rounded cursor-pointer flex flex-col">
               {movie.poster_path && (
                 <img
-                  src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                  alt={movie.original_title}
-                  loading="lazy"
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.original_title}
+                loading="lazy"
+                className="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
                 />
               )}
+              <h2 
+                className="text-white font-medium py-3 w-52">{movie.original_title}
+              </h2>
+              <div className="text-xs flex justify-between px-1">
+                <p className="text-gray-400 ">
+                  {movie.release_date
+                    ? new Date(
+                      movie.release_date
+                      ).getFullYear()
+                    : "N/A"}
+                </p>
+                <p className="text-yellow-500">
+                  {movie.vote_average
+                    ? movie.vote_average.toFixed(1)
+                    : "0.0"}
+                </p>
+            </div>
             </li>
           ))}
         </ul>

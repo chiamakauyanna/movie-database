@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import SearchBar from "../common/auth/SearchBar";
 
 const Movie = () => {
-  return (
-    <div>Movie</div>
-  )
-}
+    return <div></div>;
+};
 
-export default Movie
+export default Movie;
