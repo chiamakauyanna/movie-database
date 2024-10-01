@@ -37,25 +37,25 @@ const DisplayMovie = () => {
   };
 
   return (
-    <div className="container flex flex-col">
+    <div className="flex flex-col w-screen border-2">
       {loading && page === 1 ? (
         <p>Loading...</p>
       ) : error ? (
         <p>{error}</p>
       ) : movies.length > 0 ? (
         <>
-          <ul className="flex flex-wrap gap-4 border-green-500 border-2 justify-center w-screen">
+          <ul className="flex flex-wrap gap-4 justify-center w-screen">
             {movies.map((movie) => (
               <li
                 key={movie.id}
-                className="rounded cursor-pointer"
+                className="rounded cursor-pointer flex flex-col"
                 onClick={() => handleMovieClick(movie.id)} // Navigate to details on click
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                   alt={movie.original_title}
                   loading="lazy"
-                  className="rounded-lg transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 duration-300"
+                  className="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
                 />
                 <h2 className="text-white font-medium py-3 w-52">{movie.original_title}</h2>
                 <div className="text-xs flex justify-between">
@@ -73,7 +73,7 @@ const DisplayMovie = () => {
           {/* Button to load more movies */}
           <button
             onClick={loadMoreMovies}
-            className="mt-4 mx-auto px-4 py-2 bg-yellow-400 text-black font-bold rounded"
+            className="mt-4 mb-4  px-4 py-2 bg-yellow-400 text-black font-bold rounded mx-auto"
           >
             Load More
           </button>
