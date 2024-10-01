@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import DisplayMovie from "./components/displaymovie";
+import DisplayMovie from "./components/DisplayMovie";
 import MovieDetails from "./components/MovieDetails"; // Import the new MovieDetailsPage component
 
 const App = () => {
