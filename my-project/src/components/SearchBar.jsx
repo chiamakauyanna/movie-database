@@ -2,17 +2,17 @@ import { useState } from "react";
 import axios from "axios";
 
 const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState(""); // State for the search term
+  const [searchMovie, setSearchMovie] = useState(""); // State for the search Movie
   const [movies, setMovies] = useState([]); // State for storing fetched movies
   const [loading, setLoading] = useState(false); // State for loading status
   const [error, setError] = useState(null); // State for error handling
 
   // Function to handle search input changes
   const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
+    setSearchMovie(e.target.value);
   };
 
-  // Function to fetch movies based on the search term
+  // Function to fetch movies based on the search Movie
   const fetchMovies = async (query) => {
     setLoading(true);
     setError(null);
@@ -36,8 +36,8 @@ const SearchBar = () => {
   // Function to handle form submission
   const handleSearch = (e) => {
     e.preventDefault(); // Prevent page reload on form submit
-    if (searchTerm.trim()) {
-      fetchMovies(searchTerm); // Fetch movies only if search term is not empty
+    if (searchMovie.trim()) {
+      fetchMovies(searchMovie); // Fetch movies only if search Movie is not empty
     }
   };
 
@@ -46,7 +46,7 @@ const SearchBar = () => {
       <form onSubmit={handleSearch}>
         <input
           type="text"
-          value={searchTerm}
+          value={searchMovie}
           onChange={handleInputChange}
           placeholder="Search for a movie..."
         />
@@ -74,8 +74,8 @@ const SearchBar = () => {
         </ul>
       )}
 
-      {!loading && !error && movies.length === 0 && searchTerm && (
-        <p>No movies found for "{searchTerm}".</p>
+      {!loading && !error && movies.length === 0 && searchMovie && (
+        <p>No movies found for "{searchMovie}".</p>
       )}
     </div>
   );
