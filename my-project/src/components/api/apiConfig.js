@@ -15,3 +15,16 @@ export const fetchMovies = async (page = 1) => {
     throw error;
   }
 };
+
+export const fetchTvShows = async (page = 1) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/tv/popular?api_key=${apiKey}&page=${page}`
+    );
+    return response.data.results; // Return the array of movies
+  } catch (error) {
+    console.error('Error fetching TvShows:', error);
+    throw error;
+  }
+};
+
