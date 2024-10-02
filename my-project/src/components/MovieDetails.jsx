@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import BackButton from './common/BackButton';
 
 const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
 
@@ -36,9 +37,8 @@ const MovieDetails = () => {
           `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${apiKey}`
         );
         setSimilarMovies(similarResponse.data.results);
-
       } catch (err) {
-        setError("Failed to fetch movie details.");
+        setError('Failed to fetch movie details.');
       } finally {
         setLoading(false);
       }
@@ -47,17 +47,13 @@ const MovieDetails = () => {
     fetchMovieDetails();
   }, [id]);
 
-  if (loading) return <p className="flex justify-center items-center">Loading...</p>;
+  if (loading)
+    return <p className="flex justify-center items-center">Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className="container min-w-full">
-      <button
-        onClick={() => navigate(-1)} // Navigate back to the previous page
-        className="mb-4 text-yellow-500 z-10 top-4 left-11 font-bold px-4 py-2 rounded absolute"
-      >
-        Back Home
-      </button>
+      <BackButton />
       {movie && (
         <div className="flex flex-col">
           {movie.backdrop_path && (
@@ -84,7 +80,7 @@ const MovieDetails = () => {
                 <strong>Rating:</strong> {movie.vote_average.toFixed(1)}
               </p>
               <p className="text-gray-200 mt-4 text-sm">
-                {movie.overview || "No description available."}
+                {movie.overview || 'No description available.'}
               </p>
               <p className="text-yellow-500 mt-3">
                 <strong>Released:</strong> {movie.release_date}
@@ -93,32 +89,37 @@ const MovieDetails = () => {
                 <strong>Duration:</strong> {movie.runtime} minutes
               </p>
               <p className="text-yellow-500 mt-1">
-                <strong>Genres:</strong> {movie.genres.map(genre => genre.name).join(', ')}
+                <strong>Genres:</strong>{' '}
+                {movie.genres.map((genre) => genre.name).join(', ')}
               </p>
-               {/* Cast */}
-            <div className="">
-              <h3 className="text-yellow-500 text-md font-bold mt-3">Casts</h3>
-              <ul className="">
-                {cast.map((actor) => (
-                  <li key={actor.cast_id} className="text-gray-300 text-sm">
-                    {actor.name} as {actor.character}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              {/* Cast */}
+              <div className="">
+                <h3 className="text-yellow-500 text-md font-bold mt-3">
+                  Casts
+                </h3>
+                <ul className="">
+                  {cast.map((actor) => (
+                    <li key={actor.cast_id} className="text-gray-300 text-sm">
+                      {actor.name} as {actor.character}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
             <div className="text-sm text-gray-100 mt-5 space-x-6">
-              <button className="ring ring-yellow-500 px-3 py-2 rounded">+</button>
+              <button className="ring ring-yellow-500 px-3 py-2 rounded">
+                +
+              </button>
               <button className="bg-yellow-500 text-black font-bold px-3 py-2 rounded">
                 Watch Trailer
               </button>
             </div>
 
-           
-
             {/* Similar Movies */}
             <div className="">
-              <h3 className="text-gray-300 font-bold text-lg p-2">You may also like</h3>
+              <h3 className="text-gray-300 font-bold text-lg p-2">
+                You may also like
+              </h3>
               <ul className="flex flex-wrap gap-4 justify-center">
                 {similarMovies.map((similarMovie) => (
                   <li key={similarMovie.id} className="">
@@ -128,13 +129,19 @@ const MovieDetails = () => {
                       loading="lazy"
                       className="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
                     />
-                    <p className="text-white font-medium py-3 w-52 flex flex-wrap">{similarMovie.title}</p>
+                    <p className="text-white font-medium py-3 w-52 flex flex-wrap">
+                      {similarMovie.title}
+                    </p>
                     <div className="text-xs flex justify-between">
                       <p className="text-gray-400 ">
-                        {similarMovie.release_date ? new Date(similarMovie.release_date).getFullYear() : "N/A"}
+                        {similarMovie.release_date
+                          ? new Date(similarMovie.release_date).getFullYear()
+                          : 'N/A'}
                       </p>
                       <p className="text-yellow-500">
-                        {similarMovie.vote_average ? similarMovie.vote_average.toFixed(1) : "0.0"}
+                        {similarMovie.vote_average
+                          ? similarMovie.vote_average.toFixed(1)
+                          : '0.0'}
                       </p>
                     </div>
                   </li>
