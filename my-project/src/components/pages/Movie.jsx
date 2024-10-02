@@ -1,11 +1,10 @@
-// src/components/Movie.js
 import { useState, useEffect } from 'react';
-import { fetchMovies } from './api/apiConfig';
+import { fetchMovies } from '../api/apiConfig';
 import { useNavigate } from 'react-router-dom';
-import SearchBar from './common/SearchBar';
-import MovieCard from './common/MovieCard';
-import SideBar from './common/SideBar';
-import LoadMoreButton from './common/LoadMoreButton';
+import SearchBar from '../common/SearchBar';
+import MovieCard from '../common/MovieCard';
+import SideBar from '../common/SideBar';
+import LoadMoreButton from '../common/LoadMoreButton';
 
 const Movie = () => {
   const [movies, setMovies] = useState([]);
