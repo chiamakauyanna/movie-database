@@ -1,99 +1,72 @@
 import { useState, useEffect } from 'react';
-import { fetchTvShows } from '../api/apiConfig';
+import { fetchTvShows } from '../api/apiConfig'
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '../common/SearchBar';
+import MovieCard from '../common/MovieCard';
 import SideBar from '../common/SideBar';
+import LoadMoreButton from '../common/LoadMoreButton';
 
 const TvShows = () => {
-  const [tvshows, setTvShows] = useState([]);
+  const [Tvshow, setTvShow] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1); // State for pagination
   const navigate = useNavigate(); // Hook to navigate to different routes
 
   useEffect(() => {
-    const getShows = async () => {
+    const getTvShows = async () => {
       setLoading(true);
       setError(null);
       try {
-        const showsData = await fetchTvShows(page);
-        setTvShows((prevShows) => [...prevShows, ...showsData]);
+        const TvShowsData = await fetchTvShows(page);
+        setTvShow((prevTvShows) => [...prevTvShows, ...TvShowsData]);
       } catch (err) {
-        setError('Failed to fetch Shows.');
+        setError('Failed to fetch tvShows.');
       } finally {
         setLoading(false);
       }
     };
 
-    getShows();
+    getTvShows();
   }, [page]);
 
-  // Function to handle clicking on a shows card
-  const handleShowsClick = (id) => {
-    navigate(`/tvshows/${id}`); // Navigate to the shows details page with the shows ID
+  // Function to handle clicking on a movie card
+  const handleShowClick = (id) => {
+    navigate(`/tvshows/${id}`); // Navigate to the movie details page with the movie ID
   };
 
-  // Function to load more Shows
-  const loadMoreShows = () => {
+  const loadMore = () => {
     setPage((prevPage) => prevPage + 1); // Increment the page number
   };
 
   return (
     <div className="container mx-auto flex flex-col max-w-none">
       <SearchBar />
-      {loading && page === 1 ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : tvshows.length > 0 ? (
-        <>
-          <div className="flex gap-4">
-            <div className="w-[20%]">
-              <SideBar />
-            </div>
-            <ul className="flex flex-wrap gap-4 w-[80%]">
-              {tvshows.map((show) => (
-                <li
-                  key={show.id}
-                  className="rounded cursor-pointer flex flex-col"
-                  onClick={() => handleShowsClick(show.id)} // Navigate to details on click
-                >
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200${show.poster_path}`}
-                    alt={show.original_title}
-                    loading="lazy"
-                    className="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
-                  />
-                  <h2 className="text-white font-medium py-3 w-52">
-                    {show.original_name}
-                  </h2>
-                  <div className="text-xs flex justify-between px-1">
-                    <p className="text-gray-400 ">
-                      {show.first_air_date
-                        ? new Date(show.first_air_date).getFullYear()
-                        : 'N/A'}
-                    </p>
-                    <p className="text-yellow-500">
-                      {show.vote_average
-                        ? show.vote_average.toFixed(1)
-                        : '0.0'}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-          {/* Button to load more Shows */}
-          <button
-            onClick={loadMoreShows}
-            className="mt-4 mb-4  px-4 py-2 bg-yellow-400 text-black font-bold rounded mx-auto"
-          >
-            Load More
-          </button>
-        </>
-      ) : (
-        <p>No shows found.</p>
-      )}
+      <div className="flex">
+        <SideBar />
+        <div className="w-4/5">
+          <ul className="flex flex-wrap gap-4">
+            {loading ? (
+              <p>Loading...</p>
+            ) : error ? (
+              <p>{error}</p>
+            ) : (
+              Tvshow.map((show) => (
+                <MovieCard
+                  id={show.id}
+                  poster_path={show.poster_path}
+                  title={show.original_name}
+                  release_date={show.first_air_date}
+                  vote_average={show.vote_average}
+                  onClick={handleShowClick}
+                />
+              ))
+            )}
+          </ul>
+          {/* Pass loadMoreTvShows to LoadMoreButton */}
+          <LoadMoreButton onClick={loadMore} />
+        </div>
+      </div>
     </div>
   );
 };

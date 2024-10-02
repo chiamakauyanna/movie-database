@@ -36,7 +36,7 @@ const Movie = () => {
   };
 
   // Function to load more movies
-  const loadMoreMovies = () => {
+  const loadMore = () => {
     setPage((prevPage) => prevPage + 1); // Increment the page number
   };
 
@@ -54,15 +54,17 @@ const Movie = () => {
             ) : (
               movies.map((movie) => (
                 <MovieCard
-                  key={movie.id}
-                  movie={movie}
+                  id={movie.id}
+                  poster_path={movie.poster_path}
+                  title={movie.title}
+                  release_date={movie.release_date}
+                  vote_average={movie.vote_average}
                   onClick={handleMovieClick}
                 />
               ))
             )}
           </ul>
-          {/* Pass loadMoreMovies to LoadMoreButton */}
-          <LoadMoreButton onClick={loadMoreMovies} />
+          <LoadMoreButton onClick={loadMore} />
         </div>
       </div>
     </div>
