@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { fetchTvShows } from '../api/apiConfig'
+import { fetchTvShows } from '../api/apiConfig';
 import { useNavigate } from 'react-router-dom';
-import SearchBar from '../common/SearchBar';
 import MovieCard from '../common/MovieCard';
-import SideBar from '../common/SideBar';
 import LoadMoreButton from '../common/LoadMoreButton';
+import Navbar from '../common/Navbar';
 
 const TvShows = () => {
   const [Tvshow, setTvShow] = useState([]);
@@ -41,15 +40,14 @@ const TvShows = () => {
 
   return (
     <div className="container mx-auto flex flex-col max-w-none">
-      <SearchBar />
-      <div className="flex">
-        <SideBar />
-        <div className="w-4/5">
-          <ul className="flex flex-wrap gap-4">
+      <Navbar />
+      <div className="flex mx-auto">
+        <div>
+          <ul className="flex flex-wrap gap-4 border-2 ">
             {loading ? (
-              <p>Loading...</p>
+              <p className="text-white">Loading...</p>
             ) : error ? (
-              <p>{error}</p>
+              <p className="text-white">{error}</p>
             ) : (
               Tvshow.map((show) => (
                 <MovieCard
@@ -63,10 +61,9 @@ const TvShows = () => {
               ))
             )}
           </ul>
-          {/* Pass loadMoreTvShows to LoadMoreButton */}
-          <LoadMoreButton onClick={loadMore} />
         </div>
       </div>
+      <LoadMoreButton onClick={loadMore} />
     </div>
   );
 };

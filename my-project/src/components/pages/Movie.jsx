@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { fetchMovies } from '../api/apiConfig';
 import { useNavigate } from 'react-router-dom';
-import SearchBar from '../common/SearchBar';
 import MovieCard from '../common/MovieCard';
-import SideBar from '../common/SideBar';
 import LoadMoreButton from '../common/LoadMoreButton';
+import Navbar from '../common/Navbar';
 
 const Movie = () => {
   const [movies, setMovies] = useState([]);
@@ -41,16 +40,15 @@ const Movie = () => {
   };
 
   return (
-    <div className="container mx-auto flex flex-col max-w-none">
-      <SearchBar />
-      <div className="flex">
-        <SideBar />
-        <div className="w-4/5">
-          <ul className="flex flex-wrap gap-4">
+    <div className="container flex flex-col max-w-none">
+      <Navbar />
+      <div className="flex flex-col">
+        <div className=''>
+          <ul className="flex flex-wrap gap-4 justify-center">
             {loading ? (
-              <p>Loading...</p>
+              <p className="text-white">Loading...</p>
             ) : error ? (
-              <p>{error}</p>
+              <p className="text-white">{error}</p>
             ) : (
               movies.map((movie) => (
                 <MovieCard
@@ -64,8 +62,9 @@ const Movie = () => {
               ))
             )}
           </ul>
-          <LoadMoreButton onClick={loadMore} />
         </div>
+
+        <LoadMoreButton onClick={loadMore} />
       </div>
     </div>
   );

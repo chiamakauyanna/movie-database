@@ -61,7 +61,7 @@ const HomeSearchBar = () => {
   };
 
   return (
-    <div>
+    <div className=''>
       <form onSubmit={handleSearch} className="flex">
         <input
           type="text"

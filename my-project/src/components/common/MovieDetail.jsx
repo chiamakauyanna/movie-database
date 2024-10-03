@@ -1,9 +1,8 @@
-// ShowDetails.js
 import React from 'react';
-import { FaArrowLeft, FaPlus } from 'react-icons/fa6';
+import { FaArrowLeft, FaPlay, FaPlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 
-const ShowDetails = ({ show, cast }) => {
+const MovieDetail = ({ movie, cast }) => {
   const navigate = useNavigate(); // Hook to navigate back to the previous page
 
   return (
@@ -14,43 +13,43 @@ const ShowDetails = ({ show, cast }) => {
       >
         <FaArrowLeft />
       </button>
-      {show && (
+      {movie && (
         <div className="flex flex-col">
-          {show.backdrop_path && (
+          {movie.backdrop_path && (
             <img
-              src={`https://image.tmdb.org/t/p/original${show.backdrop_path}`}
-              alt={show.original_name}
+              src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              alt={movie.original_title}
               loading="lazy"
-              className="relative border-2 h-screen opacity-15 w-screen"
+              className="relative border-2 h-screen opacity-10 w-screen"
             />
           )}
-          <div className="absolute bg-[#1E1E1E] mt-72 p-6 flex justify-center gap-5 md:flex-row md:justify-start lg:gap-14 lg:flex-row flex-col ">
+          <div className="absolute bg-[#1E1E1E] mt-72 p-6 flex justify-center gap-5 md:flex-row  md:justify-start lg:gap-14 lg:flex-row flex-col ">
             <div className="">
               <img
-                src={`https://image.tmdb.org/t/p/w185${show.poster_path}`}
-                alt={show.original_name}
+                src={`https://image.tmdb.org/t/p/w185${movie.poster_path}`}
+                alt={movie.original_title}
                 className="rounded-md"
               />
             </div>
             <div className="w-4/5 lg:w-1/2 flex flex-col flex-wrap p-2">
               <h2 className="text-2xl lg:text-text-3xl mb-7 text-gray-100 font-bold">
-                {show.original_name}
+                {movie.original_title}
               </h2>
               <p className="bg-yellow-500 w-24 py-2 text-center rounded">
-                <strong>Rating:</strong> {show.vote_average.toFixed(1)}
+                <strong>Rating:</strong> {movie.vote_average.toFixed(1)}
               </p>
               <p className="text-gray-200 mt-4 text-sm">
-                {show.overview || 'No description available.'}
+                {movie.overview || 'No description available.'}
               </p>
               <p className="text-yellow-500 mt-3">
-                <strong>Aired:</strong> {show.first_air_date}
+                <strong>Released:</strong> {movie.release_date}
               </p>
               <p className="text-yellow-500 mt-1">
-                <strong>Duration:</strong> {show.episode_run_time[0]} minutes
+                <strong>Duration:</strong> {movie.runtime[0]} minutes
               </p>
               <p className="text-yellow-500 mt-1">
                 <strong>Genres:</strong>{' '}
-                {show.genres.map((genre) => genre.name).join(', ')}
+                {movie.genres.map((genre) => genre.name).join(', ')}
               </p>
               {/* Cast */}
               <div className="">
@@ -65,12 +64,12 @@ const ShowDetails = ({ show, cast }) => {
                   ))}
                 </ul>
               </div>
-              <div className="text-sm text-gray-100 mt-5 space-x-6">
-                <button className="ring ring-yellow-500 px-3 py-2 rounded">
+              <div className="text-sm text-gray-100 mt-5 flex gap-8">
+                <button className="border border-yellow-500 px-3 py-2 rounded">
                   <FaPlus />
                 </button>
-                <button className="bg-yellow-500 text-black font-bold px-3 py-2 rounded">
-                  Watch Trailer
+                <button className="bg-yellow-500 text-black font-bold px-3 py-2 rounded flex items-center gap-3">
+                 <FaPlay/> Watch Trailer
                 </button>
               </div>
             </div>
@@ -81,4 +80,4 @@ const ShowDetails = ({ show, cast }) => {
   );
 };
 
-export default ShowDetails;
+export default MovieDetail;
