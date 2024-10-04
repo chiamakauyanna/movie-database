@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import Auth from './Auth';
 import SideBar from './SideBar';
 import { FaBars } from 'react-icons/fa6';
+import Logo from './Logo';
 
 const Navbar = () => {
   // State to control sidebar visibility
@@ -18,9 +19,9 @@ const Navbar = () => {
       <SideBar toggle={toggle} toggleMenu={toggleMenu} />
       {/* When "menu" is clicked, toggleMenu is called */}
 
-      <div className="text-white cursor-pointer" onClick={toggleMenu}>
-         <FaBars/>
-          
+      <div className="text-white cursor-pointer flex items-center gap-10" onClick={toggleMenu}>
+         <FaBars className='text-yellow-500 text-2xl'/>
+          <Logo/>
       </div>
       <SearchBar />
       <Auth />

@@ -1,18 +1,18 @@
 // ShowDetails.js
 import React from 'react';
-import { FaArrowLeft, FaPlus } from 'react-icons/fa6';
+import { FaAngleLeft, FaPlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 
 const ShowDetails = ({ show, cast }) => {
-  const navigate = useNavigate(); // Hook to navigate back to the previous page
+  const navigate = useNavigate(); 
 
   return (
     <div>
       <button
-        onClick={() => navigate(-1)} // Navigate back to the previous page
-        className="mb-4 text-yellow-500 z-10 top-4 left-11 font-bold px-4 py-2 rounded absolute"
+        onClick={() => navigate(-1)}
+        className="mb-4 flex items-center text-center gap-5 text-yellow-500 z-10 top-4 left-11 font-bold px-4 py-2 rounded absolute"
       >
-        <FaArrowLeft />
+        <FaAngleLeft/> Back
       </button>
       {show && (
         <div className="flex flex-col">
@@ -21,15 +21,15 @@ const ShowDetails = ({ show, cast }) => {
               src={`https://image.tmdb.org/t/p/original${show.backdrop_path}`}
               alt={show.original_name}
               loading="lazy"
-              className="relative border-2 h-screen opacity-15 w-screen"
+              className="relative border-2 h-screen opacity-10 w-screen"
             />
           )}
-          <div className="absolute bg-[#1E1E1E] mt-72 p-6 flex justify-center gap-5 md:flex-row md:justify-start lg:gap-14 lg:flex-row flex-col ">
+          <div className="absolute bg-[#1E1E1E] mt-72 p-6 flex justify-center gap-5 md:flex-row md:justify-start lg:gap-14 lg:flex-row flex-col w-screen">
             <div className="">
               <img
-                src={`https://image.tmdb.org/t/p/w185${show.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w342${show.poster_path}`}
                 alt={show.original_name}
-                className="rounded-md"
+                className="rounded-md -translate-y-32"
               />
             </div>
             <div className="w-4/5 lg:w-1/2 flex flex-col flex-wrap p-2">
@@ -70,7 +70,7 @@ const ShowDetails = ({ show, cast }) => {
                   <FaPlus />
                 </button>
                 <button className="bg-yellow-500 text-black font-bold px-3 py-2 rounded">
-                  Watch Trailer
+                  View Trailer
                 </button>
               </div>
             </div>

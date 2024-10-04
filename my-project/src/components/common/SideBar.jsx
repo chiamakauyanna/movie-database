@@ -1,4 +1,4 @@
-import { FaBookmark, FaFilm, FaTv, FaXmark } from 'react-icons/fa6';
+import { FaBookmark, FaFilm, FaHouse, FaTv, FaXmark } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
 const SideBar = ({ toggle, toggleMenu }) => {
@@ -18,23 +18,35 @@ const SideBar = ({ toggle, toggleMenu }) => {
 
       <ul className="text-gray-500 flex flex-col gap-8 mt-10">
         <li className="ml-6 font-bold text-md flex items-center gap-4">
+          <FaHouse/>
+          <Link to="/" onClick={toggleMenu}>
+            Home
+          </Link>
+        </li>
+        <li className="ml-6 font-bold text-md flex items-center gap-4 focus:text-yellow-500">
           <FaFilm />
           <Link to="/movie" onClick={toggleMenu}>
             Movie
           </Link>
         </li>
-        <li className="ml-6 font-bold text-md flex items-center gap-4">
+        <li className="ml-6 font-bold text-md flex items-center gap-4 focus:text-yellow-500">
           <FaTv />
           <Link to="/tvshows" onClick={toggleMenu}>
             TV Shows
           </Link>
         </li>
-        <li className="ml-6 font-bold text-md flex items-center gap-4">
+        <li className="ml-6 font-bold text-md flex items-center gap-4 focus:text-yellow-500">
           <FaBookmark />
           <Link to="/watchlist" onClick={toggleMenu}>
             Watchlist
           </Link>
         </li>
+          <li className="ml-6 font-bold text-md flex items-center gap-4 focus:text-yellow-500">
+          <FaBookmark />
+          <Link to="/watchlist" onClick={toggleMenu}>
+            Genre
+          </Link>
+          </li>
       </ul>
     </div>
   );
