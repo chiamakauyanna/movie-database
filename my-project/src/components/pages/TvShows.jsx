@@ -13,7 +13,7 @@ const TvShows = () => {
    };
 
   return (
-    <div className="container flex flex-col max-w-none">
+    <div className="container flex flex-col max-w-none overflow-hidden border">
       <Navbar />
       <MovieList
         tvshow={tvshow}

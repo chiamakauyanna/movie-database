@@ -4,8 +4,8 @@ import Loading from '../common/Loading';
 
 const MovieList = ({ movies = [], tvshow = [], loading, error, onMovieClick, loadMore }) => {
   return (
-    <div>
-      <ul className="flex flex-wrap gap-4 justify-center">
+    <div className='w-screen'>
+      <ul className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 px-2">
         {loading ? (
           <Loading />
         ) : error ? (
@@ -23,7 +23,7 @@ const MovieList = ({ movies = [], tvshow = [], loading, error, onMovieClick, loa
                 onClick={onMovieClick}
               />
             ))}
-            {tvshow.map((show) => (
+              {tvshow.map((show) => (
               <MovieCard
                 key={show.id}
                 id={show.id}

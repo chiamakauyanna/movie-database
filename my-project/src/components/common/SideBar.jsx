@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const SideBar = ({ toggle, toggleMenu }) => {
   return (
     <div
-      className={`w-[20%] h-screen shadow fixed top-0 left-0 z-50 bg-black transform transition-transform duration-300 ease-in-out ${
+      className={`w-44 h-screen fixed top-0 left-0 z-50 bg-black transform transition-transform duration-300 ease-in-out ${
         toggle ? 'translate-x-0' : '-translate-x-full'
       }`}
     >

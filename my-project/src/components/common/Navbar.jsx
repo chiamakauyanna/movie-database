@@ -15,16 +15,20 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between h-24 items-center mx-10">
-      <SideBar toggle={toggle} toggleMenu={toggleMenu} />
-      {/* When "menu" is clicked, toggleMenu is called */}
-
-      <div className="text-white cursor-pointer flex items-center gap-10" onClick={toggleMenu}>
-         <FaBars className='text-yellow-500 text-2xl'/>
-          <Logo/>
+    <div className="flex flex-col w-screen">
+      <div className="flex justify-between mx-10 items-center my-6">
+        <Logo />
+        <div className="text-white cursor-pointer" onClick={toggleMenu}>
+          <FaBars className="text-yellow-500 lg:text-2xl md:text-md text-1xl" />
+        </div>
       </div>
-      <SearchBar />
-      <Auth />
+      <div>
+        <SideBar toggle={toggle} toggleMenu={toggleMenu} />
+        {/* When "menu" is clicked, toggleMenu is called */}
+      </div>
+      <div className="flex justify-center mb-6">
+        <SearchBar />
+      </div>
     </div>
   );
 };

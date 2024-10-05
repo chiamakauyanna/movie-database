@@ -35,17 +35,17 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch} className="flex">
+    <form onSubmit={handleSearch} className="flex mt-7 md:mt-0 lg:mt-0">
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for a movie or TV show..."
-        className="px-10 w-80 py-2 bg-black outline-gray-700 text-gray-100 rounded-l-lg focus:ring-gray-700"
+        className="px-10 w-80 py-2 bg-black shadow text-gray-100 rounded-l-lg focus:outline-none  focus:ring-1 focus:ring-yellow-500"
       />
       <button
         type="submit"
-        className="text-gray-100 px-2 bg-yellow-500 border border-[#1E1E1E] rounded-r-lg"
+        className="text-gray-100 px-4 bg-yellow-500 border border-[#1E1E1E] rounded-r-lg"
       >
         <FaMagnifyingGlass className="text-black" />
       </button>

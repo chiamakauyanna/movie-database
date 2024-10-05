@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FaAngleLeft } from 'react-icons/fa'; // Import the icon
+import { FaAngleLeft } from 'react-icons/fa'; 
 import MovieCard from './common/MovieCard';
 
 const SearchResults = () => {
