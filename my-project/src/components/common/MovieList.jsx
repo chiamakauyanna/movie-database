@@ -5,7 +5,7 @@ import Loading from '../common/Loading';
 const MovieList = ({ movies = [], tvshow = [], loading, error, onMovieClick, loadMore }) => {
   return (
     <div className='w-screen'>
-      <ul className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 px-2">
+      <ul className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 px-2 mx-4">
         {loading ? (
           <Loading />
         ) : error ? (

@@ -12,10 +12,10 @@ const MovieCard = ({
       onClick={() => onClick(id)} // Navigate to details on click
     >
       <img
-        src={`https://image.tmdb.org/t/p/w154${poster_path}`}
+        src={`https://image.tmdb.org/t/p/w185${poster_path}`}
         alt={title || 'Poster'}
         loading="lazy"
-        className="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 duration-300 w-30"
+        className="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
       />
       <div className="px-2 shadow">
       <h2 className="text-white font-medium py-3 lg:text-lg md:text-1xl text-sm">
