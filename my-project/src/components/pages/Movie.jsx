@@ -12,7 +12,7 @@ const Movie = () => {
   };
 
   return (
-    <div className="container flex flex-col max-w-none overflow-hidden border">
+    <div className="container flex flex-col max-w-none overflow-hidden">
       <Navbar />
       <MovieList
         movies={movies}

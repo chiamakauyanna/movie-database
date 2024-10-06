@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import SearchBar from './SearchBar';
-import Auth from './Auth';
 import SideBar from './SideBar';
 import { FaBars } from 'react-icons/fa6';
 import Logo from './Logo';

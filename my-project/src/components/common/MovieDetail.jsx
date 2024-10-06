@@ -20,7 +20,7 @@ const MovieDetail = ({ movie, cast }) => {
               src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
               alt={movie.original_title}
               loading="lazy"
-              className="relative border-2 h-screen opacity-10 w-screen"
+              className="relative h-screen opacity-10 w-screen"
             />
           )}
           <div className="absolute bg-[#1E1E1E] mt-72 p-6 flex justify-center gap-5 md:flex-row w-screen md:justify-start lg:gap-14 lg:flex-row flex-col ">
@@ -58,7 +58,7 @@ const MovieDetail = ({ movie, cast }) => {
                 </h3>
                 <ul className="">
                   {cast.map((actor) => (
-                    <li key={actor.cast_id} className="text-gray-300 text-sm">
+                    <li key={actor.cast_id} className="text-gray-300 text-sm mt-2">
                       {actor.name} as {actor.character}
                     </li>
                   ))}
