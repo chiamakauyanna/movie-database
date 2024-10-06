@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
 import Logo from '../common/Logo';
+import { DiVim } from 'react-icons/di';
 
 const Home = () => {
   return (
-    <div
-      className="h-screen bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: "url('/src/assets/image/Background_image.jpg'",
-        loading: "lazy"
-      }}
-    >
-      <div className="flex flex-col justify-center items-center h-screen bg-black bg-opacity-70">
+    <div>
+      <img
+        src="/src/assets/image/Background_image.jpg"
+        alt="background image"
+        className="h-screen bg-cover bg-center bg-no-repeat relative w-screen"
+      />
+      <div className="flex flex-col justify-center items-center h-screen bg-black bg-opacity-70 absolute top-0 w-screen">
         <Logo />
         <h2 className="text-gray-200 font-bold text-2xl">
           Enjoy the newest movies
