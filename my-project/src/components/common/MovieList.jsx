@@ -39,6 +39,7 @@ const MovieList = ({ movies = [], tvshow = [], loading, error, onMovieClick, loa
       </ul>
       {!loading && !error && (movies.length > 0 || tvshow.length > 0) && (
         <LoadMoreButton onClick={loadMore} />
+        </div>
       )}
     </div>
   );
