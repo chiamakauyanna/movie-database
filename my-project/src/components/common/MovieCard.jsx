@@ -8,7 +8,7 @@ const MovieCard = ({
 }) => {
   return (
     <li
-      className="rounded cursor-pointer flex flex-col"
+      className="rounded cursor-pointer flex flex-col w-[92px] md:w-[154px] max-w-[185px] flex-shrink-0"
       onClick={() => onClick(id)} // Navigate to details on click
     >
       <img
@@ -17,21 +17,21 @@ const MovieCard = ({
         loading="lazy"
         className="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
       />
-      <div className="px-2 shadow">
-      <h2 className="text-white font-medium py-3 lg:text-lg md:text-1xl text-sm">
-        {title}
-      </h2>
-      <div className="text-xs flex justify-between">
-        <p className="text-gray-400 text-xs">
-          {release_date ? new Date(release_date).getFullYear() : 'N/A'}
-        </p>
-        <p className="text-yellow-500 text-xs">
-          {vote_average ? vote_average.toFixed(1) : '0.0'}
-        </p>
-      </div>
+      <div className="px-2 shadow truncate ">
+        <h2 className="text-white font-medium py-3 lg:text-lg md:text-1xl text-xs flex ">
+          {title}
+        </h2>
+        <div className="text-xs flex justify-between">
+          <p className="text-gray-400 text-xs">
+            {release_date ? new Date(release_date).getFullYear() : 'N/A'}
+          </p>
+          <p className="text-yellow-500 text-xs">
+            {vote_average ? vote_average.toFixed(1) : '0.0'}
+          </p>
+        </div>
       </div>
     </li>
   );
 };
 
-export default MovieCard;
+export default MovieCard

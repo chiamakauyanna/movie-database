@@ -4,13 +4,16 @@ import Loading from '../common/Loading';
 
 const MovieList = ({ movies = [], tvshow = [], loading, error, onMovieClick, loadMore }) => {
   return (
-    <div className='w-screen'>
-      <ul className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 px-2 mx-4">
-        {loading ? (
-          <Loading />
-        ) : error ? (
-          <p className="text-red-500 w-52">{error}</p>
-        ) : (
+    <div className="relative">
+      <div className="overflow-x-auto no-scrollbar">
+        <ul className="flex gap-3">
+          {loading ? (
+            <Loading />
+          ) : error ? (
+            <div className="flex justify-center my-28 min-h-screen">
+              <p className="text-red-500">{error}</p>
+            </div>
+          ) : (
           <>
             {movies.map((movie) => (
               <MovieCard
@@ -23,7 +26,7 @@ const MovieList = ({ movies = [], tvshow = [], loading, error, onMovieClick, loa
                 onClick={onMovieClick}
               />
             ))}
-              {tvshow.map((show) => (
+                 {tvshow.map((show) => (
               <MovieCard
                 key={show.id}
                 id={show.id}
@@ -35,13 +38,13 @@ const MovieList = ({ movies = [], tvshow = [], loading, error, onMovieClick, loa
               />
             ))}
           </>
-        )}
-      </ul>
+          )}
+        </ul>
       {!loading && !error && (movies.length > 0 || tvshow.length > 0) && (
-        <LoadMoreButton onClick={loadMore} />
-        </div>
+          <LoadMoreButton onClick={loadMore} /> 
       )}
     </div>
+   </div>
   );
 };
 

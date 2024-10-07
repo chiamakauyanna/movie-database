@@ -8,6 +8,7 @@ const Home = () => {
       <img
         src="/src/assets/image/Background_image.jpg"
         alt="background image"
+        loading='lazy'
         className="h-screen bg-cover bg-center bg-no-repeat relative w-screen"
       />
       <div className="flex flex-col justify-center items-center h-screen bg-black bg-opacity-70 absolute top-0 w-screen">

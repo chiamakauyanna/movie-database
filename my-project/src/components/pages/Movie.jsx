@@ -12,7 +12,7 @@ const Movie = () => {
   };
 
   return (
-    <div className="container flex flex-col max-w-none overflow-hidden">
+    <div className="container mx-auto">
       <Navbar />
       <MovieList
         movies={movies}

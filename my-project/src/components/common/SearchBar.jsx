@@ -15,16 +15,16 @@ const SearchBar = () => {
       const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
 
       // Fetch Movies and TV Shows
-      const moviesResponse = await axios.get(
+      const moviesResult = await axios.get(
         `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`
       );
-      const tvShowsResponse = await axios.get(
+      const tvShowsResult = await axios.get(
         `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&query=${query}`
       );
 
       const searchResults = {
-        movies: moviesResponse.data.results,
-        tvShows: tvShowsResponse.data.results
+        movies: moviesResult.data.results,
+        tvShows: tvShowsResult.data.results
       };
 
       // Navigate to the SearchResults component and pass the search results as state
@@ -41,7 +41,7 @@ const SearchBar = () => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for a movie or TV show..."
-        className="px-10 w-80 py-2 bg-black shadow text-gray-100 rounded-l-lg focus:outline-none  focus:ring-1 focus:ring-yellow-500"
+        className="px-10 lg:w-80 md:w-80 w-60 py-2 bg-black shadow text-gray-100 rounded-l-lg focus:outline-none  focus:ring-1 focus:ring-yellow-500"
       />
       <button
         type="submit"

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import ShowDetails from './common/ShowDetails'
+import TvShowDetail from './common/TvShowDetail'
 import Loading from './common/Loading';
 import useFetchDetails from '../hooks/useFetchDetails';
 
@@ -9,11 +9,15 @@ const TvShowDetails = () => {
 
   if (loading) return <Loading />;
 
-  if (error) return <p className="text-red-500 w-52">{error}</p>;
+  if (error) return (
+    <div className="w-screen flex justify-center my-28 h-screen">
+      <p className="text-red-500 w-72 text-center">{error}</p>
+    </div>
+  );
 
   return (
     <div className="container min-w-full">
-      <ShowDetails show={show} cast={cast} />
+      <TvShowDetail show={show} cast={cast} />
     </div>
   );
 };
