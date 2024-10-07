@@ -35,7 +35,7 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch} className="flex mt-7 md:mt-0 lg:mt-0">
+    <form onSubmit={handleSearch} className="flex mt-2 md:mt-0 lg:mt-0">
       <input
         type="text"
         value={query}

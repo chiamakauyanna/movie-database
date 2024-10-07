@@ -5,6 +5,7 @@ import TvShows from './components/pages/TvShows';
 import TvShowsDetails from './components/TvShowsDetails';
 import Home from './components/pages/Home';
 import SearchResults from './components/SearchResults';
+import WatchList from './components/pages/WatchList';
 
 const App = () => {
   return (
@@ -16,7 +17,9 @@ const App = () => {
         <Route path="/tvshows" element={<TvShows />} />
         <Route path="/tvshows/:id" element={<TvShowsDetails />} />
         <Route path="/search-results" element={<SearchResults />} />
-        <Route path="/search-results/:id" element={<MovieDetails /> || <TvShowsDetails/>} />
+        <Route
+          path="/watchlist"
+          element={<WatchList />} />
       </Routes>
     </Router>
   );

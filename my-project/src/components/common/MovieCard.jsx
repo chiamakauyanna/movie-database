@@ -8,7 +8,7 @@ const MovieCard = ({
 }) => {
   return (
     <li
-      className="rounded cursor-pointer flex flex-col w-[92px] md:w-[154px] max-w-[185px] flex-shrink-0"
+      className="rounded cursor-pointer flex flex-col w-[92px] md:w-[154px] max-w-[185px] flex-shrink-0 shadow-lg pb-6"
       onClick={() => onClick(id)} // Navigate to details on click
     >
       <img
@@ -25,7 +25,7 @@ const MovieCard = ({
           <p className="text-gray-400 text-xs">
             {release_date ? new Date(release_date).getFullYear() : 'N/A'}
           </p>
-          <p className="text-yellow-500 text-xs">
+          <p className="bg-yellow-500 font-bold rounded px-1 text-xs">
             {vote_average ? vote_average.toFixed(1) : '0.0'}
           </p>
         </div>
