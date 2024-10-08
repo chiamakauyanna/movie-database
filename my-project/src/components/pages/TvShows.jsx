@@ -21,7 +21,7 @@ const TvShows = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container max-w-none">
       <Navbar />
       <ItemsList
         title="All TV Shows"
