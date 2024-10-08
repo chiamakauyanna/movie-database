@@ -1,92 +1,72 @@
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../common/Navbar';
 import useFetchTvShows from '../../hooks/useFetchTvShows';
-import MovieList from '../common/MovieList';
+import ItemsList from '../common/ItemsList';
 
 const TvShows = () => {
   const navigate = useNavigate();
   const {
-    tvshow,
+    tvshows,
     onTheAirTvShows,
     topRatedTvShows,
     trendingTvShows,
-    popularTvshows,
+    popularTvShows,
     loading,
     error,
     loadMore,
   } = useFetchTvShows();
 
-  const handleShowClick = (id) => {
+  const handleTvShowClick = (id) => {
     navigate(`/tvshows/${id}`);
   };
 
   return (
     <div className="container mx-auto">
       <Navbar />
-      <div>
-        <p className="pb-1 text-md text-gray-100 pl-4">All Tv Shows</p>
-        <div>
-          <MovieList
-            tvshow={tvshow}
-            loading={loading}
-            error={error}
-            onMovieClick={handleShowClick}
-            loadMore={loadMore}
-          />
-        </div>
-      </div>
+      <ItemsList
+        title="All TV Shows"
+        items={tvshows}
+        loading={loading}
+        error={error}
+        onItemClick={handleTvShowClick}
+        loadMore={loadMore}
+      />
 
-      <div>
-        <p className="pb-1 text-md text-gray-100 pl-4">On The Air</p>
-        <div>
-          <MovieList
-            tvshow={onTheAirTvShows}
-            loading={loading}
-            error={error}
-            onMovieClick={handleShowClick}
-            loadMore={loadMore}
-          />
-        </div>
-      </div>
+      <ItemsList
+        title="On The Air"
+        items={onTheAirTvShows}
+        loading={loading}
+        error={error}
+        onItemClick={handleTvShowClick}
+        loadMore={loadMore}
+      />
 
-      <div>
-        <p className="pb-1 text-md text-gray-100 pl-4">Top Rated</p>
-        <div>
-          <MovieList
-            tvshow={topRatedTvShows}
-            loading={loading}
-            error={error}
-            onMovieClick={handleShowClick}
-            loadMore={loadMore}
-          />
-        </div>
-      </div>
+      <ItemsList
+        title="Top Rated TV Shows"
+        items={topRatedTvShows}
+        loading={loading}
+        error={error}
+        onItemClick={handleTvShowClick}
+        loadMore={loadMore}
+      />
 
-      <div>
-        <p className="pb-1 text-md text-gray-100 pl-4">Trending</p>
-        <div>
-          <MovieList
-            tvshow={trendingTvShows}
-            loading={loading}
-            error={error}
-            onMovieClick={handleShowClick}
-            loadMore={loadMore}
-          />
-        </div>
-      </div>
+      <ItemsList
+        title="Trending TV Shows"
+        items={trendingTvShows}
+        loading={loading}
+        error={error}
+        onItemClick={handleTvShowClick}
+        loadMore={loadMore}
+      />
 
-      <div>
-        <p className="pb-1 text-md text-gray-100 pl-4">Popular</p>
-        <div>
-          <MovieList
-            tvshow={popularTvshows}
-            loading={loading}
-            error={error}
-            onMovieClick={handleShowClick}
-            loadMore={loadMore}
-          />
-        </div>
-      </div>
+      <ItemsList
+        title="Popular TV Shows"
+        items={popularTvShows}
+        loading={loading}
+        error={error}
+        onItemClick={handleTvShowClick}
+        loadMore={loadMore}
+      />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-const MovieCard = ({
+const ItemsCard = ({
   id,
   poster_path,
   title,
@@ -8,7 +8,7 @@ const MovieCard = ({
 }) => {
   return (
     <li
-      className="rounded cursor-pointer flex flex-col w-[92px] md:w-[154px] max-w-[185px] flex-shrink-0 shadow-lg pb-6"
+      className="rounded cursor-pointer flex flex-col w-[92px] md:w-[154px] max-w-[185px] flex-shrink-0 shadow-lg pb-6 "
       onClick={() => onClick(id)} // Navigate to details on click
     >
       <img
@@ -17,7 +17,7 @@ const MovieCard = ({
         loading="lazy"
         className="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
       />
-      <div className="px-2 shadow truncate ">
+      <div className="shadow truncate ">
         <h2 className="text-white font-medium py-3 lg:text-lg md:text-1xl text-xs flex ">
           {title}
         </h2>
@@ -34,4 +34,4 @@ const MovieCard = ({
   );
 };
 
-export default MovieCard
+export default ItemsCard

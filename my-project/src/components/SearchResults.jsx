@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaAngleLeft } from 'react-icons/fa'; 
-import MovieCard from './common/MovieCard';
+import ItemsCard from './common/ItemsCard';
 
 const SearchResults = () => {
   const location = useLocation();
@@ -8,13 +8,13 @@ const SearchResults = () => {
 
   // Fallback for search results and query if none exists
   const { searchResults, query } = location.state || {
-    searchResults: { movies: [], tvShows: [] },
+    searchResults: { items: [] },
     query: '',
   };
 
   const { movies, tvShows } = searchResults;
 
-  const onMovieClick = (id) => {
+  const onItemClick = (id) => {
     navigate(`/search-results/${id}`);
   };
 
@@ -31,32 +31,21 @@ const SearchResults = () => {
       </h2>
       <div className="w-screen">
         <ul className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 px-2 mx-4">
-          {movies.length === 0 && tvShows.length === 0 ? (
+          {items.length === 0 ? (
             <div className="w-screen flex justify-center my-28 h-screen">
               <p className="text-red-500 w-72 text-center">{error}</p>
             </div>
           ) : (
             <>
-              {movies.map((movie) => (
-                <MovieCard
-                  key={movie.id}
-                  id={movie.id}
-                  poster_path={movie.poster_path}
-                  title={movie.title}
-                  release_date={movie.release_date}
-                  vote_average={movie.vote_average}
-                  onClick={onMovieClick}
-                />
-              ))}
-              {tvShows.map((show) => (
-                <MovieCard
-                  key={show.id}
-                  id={show.id}
-                  poster_path={show.poster_path}
-                  title={show.name}
-                  release_date={show.first_air_date}
-                  vote_average={show.vote_average}
-                  onClick={onMovieClick}
+              {items.map((item) => (
+                <ItemsCard
+                  key={`item-${item.id}`}
+                  id={item.id}
+                  poster_path={item.poster_path}
+                  title={item.title || item.name}
+                  release_date={item.release_date || item.first_air_date}
+                  vote_average={item.vote_average}
+                  onClick={onItemClick}
                 />
               ))}
             </>

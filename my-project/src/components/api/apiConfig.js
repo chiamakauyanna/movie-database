@@ -27,7 +27,7 @@ export const fetchTopRatedMovies = async (page = 1) => {
     );
     return response.data.results; // Return the array of movies
   } catch (error) {
-    console.error('Error fetching Movies:', error);
+    console.error('Error fetching top rated movies:', error);
     throw error;
   }
 };
@@ -40,7 +40,7 @@ export const fetchPopularMovies = async (page = 1) => {
     );
     return response.data.results; // Return the array of movies
   } catch (error) {
-    console.error('Error fetching Movies:', error);
+    console.error('Error fetching popular movies:', error);
     throw error;
   }
 };
@@ -53,7 +53,7 @@ export const fetchUpcomingMovies = async (page = 1) => {
     );
     return response.data.results; // Return the array of movies
   } catch (error) {
-    console.error('Error fetching Movies:', error);
+    console.error('Error fetching upcoming movies:', error);
     throw error;
   }
 };
@@ -67,7 +67,7 @@ export const fetchNowplayingMovies = async (page = 1) => {
     );  
     return response.data.results; // Return the array of movies
   } catch (error) {
-    console.error('Error fetching Movies:', error);
+    console.error('Error fetching now playing movies:', error);
     throw error;
   }  
 };  
@@ -79,7 +79,7 @@ export const fetchTrendingMovies = async (page = 1) => {
     );  
     return response.data.results; // Return the array of movies
   } catch (error) {
-    console.error('Error fetching Movies:', error);
+    console.error('Error fetching trending movies:', error);
     throw error;
   }  
 };  
@@ -91,7 +91,7 @@ export const fetchTvShows = async (page = 1) => {
     );  
     return response.data.results; // Return the array of movies
   } catch (error) {
-    console.error('Error fetching TvShows:', error);
+    console.error('Error fetching tv shows:', error);
     throw error;
   }  
 };  
@@ -104,20 +104,20 @@ export const fetchPopularTvShows = async (page = 1) => {
     );  
     return response.data.results; // Return the array of movies
   } catch (error) {
-    console.error('Error fetching TvShows:', error);
+    console.error('Error fetching popular tv shows:', error);
     throw error;
   }  
 };  
 
 // Fetch top rated tvshows with pagination
-export const fetchTvToprated = async (page = 1) => {
+export const fetchTvTopRatedTvShows = async (page = 1) => {
   try {
     const response = await axios.get(
       `${BASE_URL}/tv/top_rated?api_key=${apiKey}&language=en-US&page=${page}`
     );  
     return response.data.results; // Return the array of movies
   } catch (error) {
-    console.error('Error fetching TvShows:', error);
+    console.error('Error fetching top rated tv shows:', error);
     throw error;
   }  
 };  
@@ -130,7 +130,7 @@ export const fetchTrendingTvshows = async (page = 1) => {
     );  
     return response.data.results; // Return the array of movies
   } catch (error) {
-    console.error('Error fetching TvShows:', error);
+    console.error('Error fetching trending tv shows:', error);
     throw error;
   }  
 };  
@@ -144,7 +144,7 @@ export const fetchOnTheAirTvshows = async (page = 1) => {
     );  
     return response.data.results; // Return the array of movies
   } catch (error) {
-    console.error('Error fetching TvShows:', error);
+    console.error('Error fetching on the air tv shows:', error);
     throw error;
   }  
 };  

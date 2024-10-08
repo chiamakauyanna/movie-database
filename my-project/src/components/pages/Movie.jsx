@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../common/Navbar';
 import useFetchMovies from '../../hooks/useFetchMovies';
-import MovieList from '../common/MovieList'; 
+import ItemsList from '../common/ItemsList';
 
 const Movie = () => {
   const navigate = useNavigate();
@@ -24,83 +24,59 @@ const Movie = () => {
   return (
     <div className="container mx-auto">
       <Navbar />
-      <div>
-        <p className="pb-1 text-md text-gray-100 pl-4">All Movies</p>
-        <div>
-          <MovieList
-            movies={movies}
-            loading={loading}
-            error={error}
-            onMovieClick={handleMovieClick}
-            loadMore={loadMore}
-          />
-        </div>
-      </div>
+      <ItemsList
+        title="All Movies"
+        items={movies}
+        loading={loading}
+        error={error}
+        onItemClick={handleMovieClick}
+        loadMore={loadMore}
+      />
 
-      <div>
-        <p className="pb-1 text-md text-gray-100 pl-4">Now Playing</p>
-        <div>
-          <MovieList
-            movies={nowPlayingMovies}
-            loading={loading}
-            error={error}
-            onMovieClick={handleMovieClick}
-            loadMore={loadMore}
-          />
-        </div>
-      </div>
+      <ItemsList
+        title="Now Playing"
+        items={nowPlayingMovies}
+        loading={loading}
+        error={error}
+        onItemClick={handleMovieClick}
+        loadMore={loadMore}
+      />
 
-      <div>
-        <p className="pb-1 text-md text-gray-100 pl-4">Top Rated Movies</p>
-        <div>
-          <MovieList
-            movies={topRatedMovies}
-            loading={loading}
-            error={error}
-            onMovieClick={handleMovieClick}
-            loadMore={loadMore}
-          />
-        </div>
-      </div>
+      <ItemsList
+        title="Top Rated Movies"
+        items={topRatedMovies}
+        loading={loading}
+        error={error}
+        onItemClick={handleMovieClick}
+        loadMore={loadMore}
+      />
 
-      <div>
-        <p className="pb-1 text-md text-gray-100 pl-4">Trending Movies</p>
-        <div>
-          <MovieList
-            movies={trendingMovies}
-            loading={loading}
-            error={error}
-            onMovieClick={handleMovieClick}
-            loadMore={loadMore}
-          />
-        </div>
-      </div>
+      <ItemsList
+        title="Trending Movies"
+        items={trendingMovies}
+        loading={loading}
+        error={error}
+        onItemClick={handleMovieClick}
+        loadMore={loadMore}
+      />
 
-      <div>
-        <p className="pb-1 text-md text-gray-100 pl-4">Upcoming Movies</p>
-        <div>
-          <MovieList
-            movies={upcomingMovies}
-            loading={loading}
-            error={error}
-            onMovieClick={handleMovieClick}
-            loadMore={loadMore}
-          />
-        </div>
-      </div>
+      <ItemsList
+        title="Upcoming Movies"
+        items={upcomingMovies}
+        loading={loading}
+        error={error}
+        onItemClick={handleMovieClick}
+        loadMore={loadMore}
+      />
 
-      <div>
-        <p className="pb-1 text-md text-gray-100 pl-4">Popular Movies</p>
-        <div>
-          <MovieList
-            movies={popularMovies}
-            loading={loading}
-            error={error}
-            onMovieClick={handleMovieClick}
-            loadMore={loadMore}
-          />
-        </div>
-      </div>
+      <ItemsList
+        title="Popular Movies"
+        items={popularMovies}
+        loading={loading}
+        error={error}
+        onItemClick={handleMovieClick}
+        loadMore={loadMore}
+      />
     </div>
   );
 };

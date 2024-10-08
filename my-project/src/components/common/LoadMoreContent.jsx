@@ -1,7 +1,7 @@
 import { FaChevronRight } from "react-icons/fa6";
 
 // Function to load more movies
-const LoadMoreButton = ({ onClick }) => {
+const LoadMoreContent = ({ onClick }) => {
   return (
     <div className="flex justify-center">
       <button
@@ -14,4 +14,4 @@ const LoadMoreButton = ({ onClick }) => {
   );
 };
 
-export default LoadMoreButton;
+export default LoadMoreContent;

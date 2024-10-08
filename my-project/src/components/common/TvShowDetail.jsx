@@ -27,7 +27,7 @@ const TvShowDetail = ({ show, cast }) => {
               <img
                 src={`https://image.tmdb.org/t/p/w342${show.poster_path}`}
                 alt={show.original_name}
-                className="rounded-full w-[300px] h-[300px]"
+                className="rounded w-[300px] h-[300px]"
               />
             </div>
             <div className="w-4/5 lg:w-1/2 flex flex-col flex-wrap p-4 lg:text-left md:text-left text-center">

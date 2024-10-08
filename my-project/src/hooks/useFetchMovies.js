@@ -6,7 +6,6 @@ import { fetchTrendingMovies } from '../components/api/apiConfig';
 import { fetchPopularMovies } from '../components/api/apiConfig';
 import { fetchUpcomingMovies } from '../components/api/apiConfig';
 
-
 const useFetchMovies = (initialPage = 1) => {
   const [movies, setMovies] = useState([]);
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
@@ -26,24 +25,31 @@ const useFetchMovies = (initialPage = 1) => {
     const getMovies = async () => {
       setLoading(true);
       setError(null);
+
+      // Use Promise.all to fetch all data in parallel to reduce total loading time.
       try {
-        const moviesData = await fetchMovies(page);
-        setMovies((prevMovies) => [...prevMovies, ...moviesData]);
+        const [
+          moviesData,
+          nowPlayingData,
+          topRatedData,
+          popularData,
+          trendingData,
+          upcomingData
+        ] = await Promise.all([
+          fetchMovies(page),
+          fetchNowplayingMovies(page),
+          fetchTopRatedMovies(page),
+          fetchPopularMovies(page),
+          fetchTrendingMovies(page),
+          fetchUpcomingMovies(page),
+        ]);
 
-        const nowPlayingData = await fetchNowplayingMovies(page);
-        setNowPlayingMovies((prevMovies) => [...prevMovies, ...nowPlayingData]);
-
-        const topRatedData = await fetchTopRatedMovies(page);
-        setTopRatedMovies((prevMovies) => [...prevMovies, ...topRatedData]);
-
-        const popularData = await fetchPopularMovies(page);
-        setPopularMovies((prevMovies) => [...prevMovies, ...popularData]);
-
-        const trendingData = await fetchTrendingMovies(page);
-        setTrendingMovies((prevMovies) => [...prevMovies, ...trendingData]);
-
-        const upcomingData = await fetchUpcomingMovies(page);
-        setUpcomingMovies((prevMovies) => [...prevMovies, ...upcomingData]);
+        setMovies((prev) => [...prev, ...moviesData]);
+        setNowPlayingMovies((prev) => [...prev, ...nowPlayingData]);
+        setTopRatedMovies((prev) => [...prev, ...topRatedData]);
+        setPopularMovies((prev) => [...prev, ...popularData]);
+        setTrendingMovies((prev) => [...prev, ...trendingData]);
+        setUpcomingMovies((prev) => [...prev, ...upcomingData]);
       } catch (err) {
         setError(
           "Uh-oh! We couldn't load the content. Please check your connection or try again later."
@@ -56,7 +62,17 @@ const useFetchMovies = (initialPage = 1) => {
     getMovies();
   }, [page]);
 
-  return { movies, nowPlayingMovies, popularMovies, trendingMovies, upcomingMovies, topRatedMovies, loading, error, loadMore };
+  return {
+    movies,
+    nowPlayingMovies,
+    popularMovies,
+    trendingMovies,
+    upcomingMovies,
+    topRatedMovies,
+    loading,
+    error,
+    loadMore,
+  };
 };
 
 export default useFetchMovies;

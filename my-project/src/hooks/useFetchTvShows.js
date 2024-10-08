@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { fetchTvShows } from '../components/api/apiConfig';
 import { fetchOnTheAirTvshows } from '../components/api/apiConfig';
-import { fetchTvToprated } from '../components/api/apiConfig';
+import { fetchTvTopRatedTvShows } from '../components/api/apiConfig';
 import { fetchTrendingTvshows } from '../components/api/apiConfig';
 import { fetchPopularTvShows } from '../components/api/apiConfig';
 
 const useFetchTvShows = (initialPage = 1) => {
-  const [tvshow, setTvShow] = useState([]);
+  const [tvshows, setTvShows] = useState([]);
   const [onTheAirTvShows, setOnTheAirTvShows] = useState([]);
   const [topRatedTvShows, setTopRatedTvShows] = useState([]);
   const [trendingTvShows, setTrendingTvShows] = useState([]);
@@ -19,29 +19,32 @@ const useFetchTvShows = (initialPage = 1) => {
     setPage((prevPage) => prevPage + 1);
   };
 
+  // Use Promise.all to fetch all data in parallel to reduce total loading time.
+
   useEffect(() => {
     const getTvShows = async () => {
       setLoading(true);
       setError(null);
       try {
-        const TvShowsData = await fetchTvShows(page);
-        setTvShow((prevTvShow) => [...prevTvShow, ...TvShowsData]);
-
-        const OnTheAirData = await fetchOnTheAirTvshows(page);
-        setOnTheAirTvShows((prevTvShow) => [...prevTvShow, ...OnTheAirData]);
-
-        const TopRatedData = await fetchTvToprated(page);
-        setTopRatedTvShows((prevTvShow) => [...prevTvShow, ...TopRatedData]);
-
-        const trendingTvShowsData = await fetchTrendingTvshows(page);
-        setTrendingTvShows((prevTvShow) => [
-          ...prevTvShow,
-          ...trendingTvShowsData,
+        const [
+          TvShowsData,
+          OnTheAirData,
+          trendingTvShowsData,
+          TopRatedData,
+          popularData,
+        ] = await Promise.all([
+          fetchTvShows(page),
+          fetchOnTheAirTvshows(page),
+          fetchTvTopRatedTvShows(page),
+          fetchTrendingTvshows(page),
+          fetchPopularTvShows(page),
         ]);
 
-        const popularData = await fetchPopularTvShows(page);
+        setTvShows((prev) => [...prev, ...TvShowsData]);
+        setOnTheAirTvShows((prev) => [...prev, ...OnTheAirData]);
+        setTopRatedTvShows((prev) => [...prev, ...TopRatedData]);
+        setTrendingTvShows((prev) => [...prev, ...trendingTvShowsData]);
         setPopularTvshows((prevTvShow) => [...prevTvShow, ...popularData]);
-        
       } catch (err) {
         setError(
           "Uh-oh! We couldn't load the content. Please check your connection or try again later."
@@ -55,7 +58,7 @@ const useFetchTvShows = (initialPage = 1) => {
   }, [page]);
 
   return {
-    tvshow,
+    tvshows,
     onTheAirTvShows,
     topRatedTvShows,
     trendingTvShows,
