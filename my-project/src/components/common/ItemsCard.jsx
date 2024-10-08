@@ -10,6 +10,10 @@ const ItemsCard = ({
     <li
       className="rounded cursor-pointer flex flex-col w-[92px] md:w-[154px] max-w-[185px] flex-shrink-0 shadow-lg pb-6 "
       onClick={() => onClick(id)} // Navigate to details on click
+      tabIndex={0} // Allow keyboard navigation
+      onKeyPress={(e) => {
+        if (e.key === 'Enter') onClick();
+      }} // Handle Enter key for accessibility
     >
       <img
         src={`https://image.tmdb.org/t/p/w185${poster_path}`}
