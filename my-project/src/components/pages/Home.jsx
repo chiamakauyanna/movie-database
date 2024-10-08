@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import Logo from '../common/Logo';
-import { DiVim } from 'react-icons/di';
 
 const Home = () => {
   return (
@@ -18,11 +17,8 @@ const Home = () => {
         </h2>
 
         <button className="mt-4 mb-4 px-10 py-2 bg-yellow-500 text-black font-bold rounded">
-          <Link to="/movie">Log in</Link>
+          <Link to="/movie">View Site</Link>
         </button>
-        <p className="text-gray-100">
-          no account?<strong className="text-yellow-500"> Sign up</strong>{' '}
-        </p>
       </div>
     </div>
   );
