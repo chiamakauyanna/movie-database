@@ -13,6 +13,7 @@ body {
   background-color: #21201e;
   font-family: 'Roboto Mono', monospace;
   font-optical-sizing: auto;
+  overflow-x: hidden;
 }
 
 h1,
