@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div>
       <img
-        src="/src/assets/image/Background_image.jpg"
+        src="/src/assets/background.jpg"
         alt="background image"
         loading='lazy'
         className="h-screen bg-cover bg-center bg-no-repeat relative w-screen"
