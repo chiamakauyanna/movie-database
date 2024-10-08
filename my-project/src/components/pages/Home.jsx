@@ -4,12 +4,13 @@ import Logo from '../common/Logo';
 const Home = () => {
   return (
     <div>
-      <img
+      {/* <img
         src="/src/assets/background.jpg"
         alt="background image"
         loading='lazy'
         className="h-screen bg-cover bg-center bg-no-repeat relative w-screen"
-      />
+      /> */}
+     <div class="bg-cover bg-center h-screen" className="bg-cover bg-center h-screen border bg-[url('/src/assets/background.jpg')]">
       <div className="flex flex-col justify-center items-center h-screen bg-black bg-opacity-70 absolute top-0 w-screen">
         <Logo />
         <h2 className="text-gray-200 font-bold text-2xl">
@@ -20,6 +21,7 @@ const Home = () => {
           <Link to="/movie">View Site</Link>
         </button>
       </div>
+    </div>
     </div>
   );
 };
