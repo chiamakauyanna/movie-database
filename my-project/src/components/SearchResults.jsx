@@ -1,57 +1,91 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FaAngleLeft } from 'react-icons/fa'; 
+import { FaAngleLeft } from 'react-icons/fa';
 import ItemsCard from './common/ItemsCard';
 
 const SearchResults = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Fallback for search results and query if none exists
+  // Destructure searchResults and query from location.state with fallbacks
   const { searchResults, query } = location.state || {
-    searchResults: { items: [] },
+    searchResults: { movies: [], tvShows: [] },
     query: '',
   };
 
   const { movies, tvShows } = searchResults;
 
-  const onItemClick = (id) => {
-    navigate(`/search-results/${id}`);
+  // Function to handle item clicks, navigating based on type
+  const onItemClick = (id, type) => {
+    if (type === 'movie') {
+      navigate(`/movie/${id}`);
+    } else if (type === 'tv') {
+      navigate(`/tvshows/${id}`);
+    }
   };
 
   return (
-    <div className="container max-w-none ">
+    <div className="container max-w-none">
+      {/* Back Button */}
       <button
         onClick={() => navigate(-1)} // Navigate back to the previous page
-        className="mb-4 flex items-center text-center gap-5 text-yellow-500 font-bold px-4 py-2 rounded mt-9 ml-9"
+        className="mb-4 flex items-center text-center gap-5 text-yellow-500 font-bold mt-9 ml-9"
       >
         <FaAngleLeft /> Back
       </button>
-      <h2 className="text-yellow-500 font-bold text-2xl my-7 ml-10">
-        Search Results for "{query}"
+
+      {/* Search Query Title */}
+      <h2 className="text-gray-200 font-bold text-lg my-7 ml-6">
+        Search Results for " <span className="text-yellow-500">{query}</span> "
       </h2>
-      <div className="w-screen">
-        <ul className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 px-2 mx-4">
-          {items.length === 0 ? (
-            <div className="w-screen flex justify-center my-28 h-screen">
-              <p className="text-red-500 w-72 text-center">{error}</p>
-            </div>
-          ) : (
-            <>
-              {items.map((item) => (
-                <ItemsCard
-                  key={`item-${item.id}`}
-                  id={item.id}
-                  poster_path={item.poster_path}
-                  title={item.title || item.name}
-                  release_date={item.release_date || item.first_air_date}
-                  vote_average={item.vote_average}
-                  onClick={onItemClick}
-                />
-              ))}
-            </>
-          )}
-        </ul>
-      </div>
+
+      {/* Movies Section */}
+      {movies.length > 0 && (
+        <div className="flex flex-col mb-8 mx-auto">
+          <h3 className="text-xl text-gray-100 pl-4 mb-4">Movies</h3>
+          <ul className="items-center flex justify-center gap-3 flex-wrap">
+            {movies.map((movie) => (
+              <ItemsCard
+                key={`movie-${movie.id}`}
+                id={movie.id}
+                poster_path={movie.poster_path}
+                title={movie.title || movie.name}
+                release_date={movie.release_date || movie.first_air_date}
+                vote_average={movie.vote_average}
+                onClick={() => onItemClick(movie.id, 'movie')}
+              />
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* TV Shows Section */}
+      {tvShows.length > 0 && (
+        <div>
+          <h3 className="text-xl text-gray-100 pl-4 mb-4">TV Shows</h3>
+          <ul className="items-center flex justify-center gap-3 flex-wrap">
+            {tvShows.map((show) => (
+              <ItemsCard
+                key={`tv-${show.id}`}
+                id={show.id}
+                poster_path={show.poster_path}
+                title={show.title || show.name}
+                release_date={show.release_date || show.first_air_date}
+                vote_average={show.vote_average}
+                onClick={() => onItemClick(show.id, 'tv')}
+              />
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* No Results Found */}
+      {movies.length === 0 && tvShows.length === 0 && (
+        <div className="w-full flex justify-center my-28 h-screen">
+          <p className="text-red-500 text-center text-lg">
+            No results found for "{query}". Please try a different search term.
+          </p>
+        </div>
+      )}
     </div>
   );
 };
