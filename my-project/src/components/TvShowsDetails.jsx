@@ -3,8 +3,10 @@ import ItemsDetailsList from './common/ItemsDetailsList';
 import useFetchDetails from '../hooks/useFetchDetails';
 
 const TvShowDetails = () => {
-  const { id } = useParams(); // Get the TV show ID from the URL
-  const { details: show, cast, loading, error } = useFetchDetails('tv', id); // Use the hook for TV shows
+  // Get the TV show ID from the URL
+  const { id } = useParams(); 
+  // Use the hook for TV shows
+  const { details: show, cast, trailer,  loading, error } = useFetchDetails('tv', id); 
 
   return (
     <div className="container min-w-full">
@@ -14,6 +16,7 @@ const TvShowDetails = () => {
         cast={cast}
         loading={loading}
         error={error}
+        trailer={trailer}
       />
     </div>
   );

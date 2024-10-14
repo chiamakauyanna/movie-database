@@ -1,49 +1,32 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
+import { fetchDetails } from '../api/apiConfig';
 
 const useFetchDetails = (type, id) => {
   const [details, setDetails] = useState(null);
   const [cast, setCast] = useState([]);
+  const [trailer, setTrailer] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchDetails = async () => {
-      // Prevent fetching if no ID is provided
-      if (!id) return;
+    const fetchData = async () => {
+     // Prevent fetching if no ID is provided
+      if (!id) return; 
 
       setLoading(true);
       setError(null);
       try {
-        // Fetch details (movie or TV show based on type)
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/${type}/${id}`,
-          {
-            params: {
-              api_key: apiKey,
-              language: 'en-US',
-            },
-          }
-        );
-        setDetails(response.data);
+        // Call the fetchDetails function to get details, cast, and trailer
+        const data = await fetchDetails(id, type);
 
-        // Fetch cast
-        const castResponse = await axios.get(
-          `https://api.themoviedb.org/3/${type}/${id}/credits`,
-          {
-            params: {
-              api_key: apiKey,
-              language: 'en-US',
-            },
-          }
-        );
-        setCast(castResponse.data.cast.slice(0, 5)); // Get top 5 cast members
+        // Destructure the returned data to set each state
+        setDetails(data.details);
+        setCast(data.cast);
+        setTrailer(data.trailer);
       } catch (err) {
         console.error(
           'Error fetching details:',
-          err.response?.data || err.message
+          err.message || err.response?.data
         );
         setError(
           "Uh-oh! We couldn't load the content. Please try again later."
@@ -53,10 +36,10 @@ const useFetchDetails = (type, id) => {
       }
     };
 
-    fetchDetails();
+    fetchData();
   }, [type, id]);
 
-  return { details, cast, loading, error };
+  return { details, cast, trailer, loading, error }; // Return trailer along with other data
 };
 
 export default useFetchDetails;

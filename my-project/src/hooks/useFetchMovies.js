@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { fetchMovies } from '../components/api/apiConfig';
-import { fetchNowplayingMovies } from '../components/api/apiConfig';
-import { fetchTopRatedMovies } from '../components/api/apiConfig';
-import { fetchTrendingMovies } from '../components/api/apiConfig';
-import { fetchPopularMovies } from '../components/api/apiConfig';
-import { fetchUpcomingMovies } from '../components/api/apiConfig';
+import { fetchMovies } from '../api/apiConfig';
+import { fetchNowplayingMovies } from '../api/apiConfig';
+import { fetchTopRatedMovies } from '../api/apiConfig';
+import { fetchTrendingMovies } from '../api/apiConfig';
+import { fetchPopularMovies } from '../api/apiConfig';
+import { fetchUpcomingMovies } from '../api/apiConfig';
 
 const useFetchMovies = (initialPage = 1) => {
   const [movies, setMovies] = useState([]);
@@ -16,10 +16,6 @@ const useFetchMovies = (initialPage = 1) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(initialPage);
-
-  const loadMore = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
 
   useEffect(() => {
     const getMovies = async () => {
@@ -71,7 +67,7 @@ const useFetchMovies = (initialPage = 1) => {
     topRatedMovies,
     loading,
     error,
-    loadMore,
+    setPage
   };
 };
 

@@ -4,7 +4,7 @@ import useFetchDetails from '../hooks/useFetchDetails'
 
 const MovieDetails = () => {
   const { id } = useParams(); // Get the movie ID from the URL
-  const { details: movie, cast, loading, error } = useFetchDetails('movie', id); // Use the hook for movies
+  const { details: movie, cast, loading, error, trailer } = useFetchDetails('movie', id); // Use the hook for movies
 
   return (
     <div className="container min-w-full">
@@ -14,6 +14,7 @@ const MovieDetails = () => {
         cast={cast}
         loading={loading}
         error={error}
+        trailer={trailer}
       />
     </div>
   );

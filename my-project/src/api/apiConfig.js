@@ -83,6 +83,7 @@ export const fetchTrendingMovies = async (page = 1) => {
     throw error;
   }  
 };  
+
 // Fetch tvshows with pagination
 export const fetchTvShows = async (page = 1) => {
   try {
@@ -110,7 +111,7 @@ export const fetchPopularTvShows = async (page = 1) => {
 };  
 
 // Fetch top rated tvshows with pagination
-export const fetchTvTopRatedTvShows = async (page = 1) => {
+export const fetchTopRatedTvShows = async (page = 1) => {
   try {
     const response = await axios.get(
       `${BASE_URL}/tv/top_rated?api_key=${apiKey}&language=en-US&page=${page}`
@@ -123,7 +124,7 @@ export const fetchTvTopRatedTvShows = async (page = 1) => {
 };  
 
 // Fetch top trending tvshows with pagination
-export const fetchTrendingTvshows = async (page = 1) => {
+export const fetchTrendingTvShows = async (page = 1) => {
   try {
     const response = await axios.get(
       `${BASE_URL}/trending/tv/day?api_key=${apiKey}&language=en-US&page=${page}`
@@ -137,7 +138,7 @@ export const fetchTrendingTvshows = async (page = 1) => {
 
 
 // Fetch on the air tvshows with pagination
-export const fetchOnTheAirTvshows = async (page = 1) => {
+export const fetchOnTheAirTvShows = async (page = 1) => {
   try {
     const response = await axios.get(
       `${BASE_URL}/tv/on_the_air?api_key=${apiKey}&language=en-US&page=${page}`
@@ -149,3 +150,46 @@ export const fetchOnTheAirTvshows = async (page = 1) => {
   }  
 };  
 
+// Fetch Details (for both movies and TV shows) 
+export const fetchDetails = async (id, type) => {
+  try {
+    // Fetch movie or TV show details
+    const response = await axios.get(`${BASE_URL}/${type}/${id}`, {
+      params: {
+        api_key: apiKey,
+        language: 'en-US',
+      },
+    });
+    const details = response.data;
+
+    // Fetch cast information
+    const castResponse = await axios.get(`${BASE_URL}/${type}/${id}/credits`, {
+      params: {
+        api_key: apiKey,
+        language: 'en-US',
+      },
+    });
+    const cast = castResponse.data.cast.slice(0, 5); // Get top 5 cast members
+
+    // Fetch trailer (videos) information
+    const trailerResponse = await axios.get(
+      `${BASE_URL}/${type}/${id}/videos`,
+      {
+        params: {
+          api_key: apiKey,
+          language: 'en-US',
+        },
+      }
+    );
+    const trailers = trailerResponse.data.results.filter(
+      (video) => video.type === 'Trailer' && video.site === 'YouTube'
+    ); // Filter for trailers hosted on YouTube
+
+    const trailer = trailers.length > 0 ? trailers[0] : null; // Get the first available trailer
+
+    return { details, cast, trailer };
+  } catch (err) {
+    console.error('Error fetching details:', err.response?.data || err.message);
+    throw new Error('Error fetching content. Please try again later.');
+  }
+};

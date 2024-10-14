@@ -33,7 +33,7 @@ const TvShows = () => {
       />
 
       <ItemsList
-        title="On The Air"
+        title="Airing"
         items={onTheAirTvShows}
         loading={loading}
         error={error}
@@ -42,16 +42,7 @@ const TvShows = () => {
       />
 
       <ItemsList
-        title="Top Rated TV Shows"
-        items={topRatedTvShows}
-        loading={loading}
-        error={error}
-        onItemClick={handleTvShowClick}
-        loadMore={loadMore}
-      />
-
-      <ItemsList
-        title="Trending TV Shows"
+        title="Trending"
         items={trendingTvShows}
         loading={loading}
         error={error}
@@ -59,14 +50,23 @@ const TvShows = () => {
         loadMore={loadMore}
       />
 
+<ItemsList
+  title="Popular"
+  items={popularTvShows}
+  loading={loading}
+  error={error}
+  onItemClick={handleTvShowClick}
+  loadMore={loadMore}
+/>
       <ItemsList
-        title="Popular TV Shows"
-        items={popularTvShows}
+        title="Top Rated"
+        items={topRatedTvShows}
         loading={loading}
         error={error}
         onItemClick={handleTvShowClick}
         loadMore={loadMore}
       />
+
     </div>
   );
 };

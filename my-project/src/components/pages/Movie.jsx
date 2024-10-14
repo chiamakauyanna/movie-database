@@ -43,16 +43,7 @@ const Movie = () => {
       />
 
       <ItemsList
-        title="Top Rated Movies"
-        items={topRatedMovies}
-        loading={loading}
-        error={error}
-        onItemClick={handleMovieClick}
-        loadMore={loadMore}
-      />
-
-      <ItemsList
-        title="Trending Movies"
+        title="Trending"
         items={trendingMovies}
         loading={loading}
         error={error}
@@ -61,8 +52,8 @@ const Movie = () => {
       />
 
       <ItemsList
-        title="Upcoming Movies"
-        items={upcomingMovies}
+        title="Popular"
+        items={popularMovies}
         loading={loading}
         error={error}
         onItemClick={handleMovieClick}
@@ -70,8 +61,16 @@ const Movie = () => {
       />
 
       <ItemsList
-        title="Popular Movies"
-        items={popularMovies}
+        title="Upcoming"
+        items={upcomingMovies}
+        loading={loading}
+        error={error}
+        onItemClick={handleMovieClick}
+        loadMore={loadMore}
+      />
+      <ItemsList
+        title="Top Rated"
+        items={topRatedMovies}
         loading={loading}
         error={error}
         onItemClick={handleMovieClick}

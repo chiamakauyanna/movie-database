@@ -1,7 +1,7 @@
 import Loading from './Loading';
-import ItemsDetailsCard from './ItemsDetailsCard';
+import ItemsDetails from './ItemsDetails';
 
-const ItemsDetailsList = ({ details, cast, loading, error }) => {
+const ItemsDetailsList = ({ details, cast, trailer, loading, error }) => {
   return (
     <div>
       {loading ? (
@@ -12,7 +12,7 @@ const ItemsDetailsList = ({ details, cast, loading, error }) => {
         </div>
       ) : (
         details && (
-          <ItemsDetailsCard
+          <ItemsDetails
             backdrop_path={details.backdrop_path}
             poster_path={details.poster_path}
             title={details.title || details.name}
@@ -30,6 +30,7 @@ const ItemsDetailsList = ({ details, cast, loading, error }) => {
             runtime={details.runtime}
             genres={details.genres}
             cast={cast}
+            trailer={trailer}
           />
         )
       )}

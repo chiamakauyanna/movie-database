@@ -22,7 +22,7 @@ const ItemsCard = ({
         className="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
       />
       <div className="shadow truncate ">
-        <h2 className="text-white font-medium py-3 lg:text-lg md:text-1xl text-xs flex ">
+        <h2 className="text-white font-medium py-3 lg:text-base md:text-1xl text-xs flex ">
           {title}
         </h2>
         <div className="text-xs flex justify-between">

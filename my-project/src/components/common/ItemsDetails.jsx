@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import { FaPlay, FaPlus, FaAngleLeft } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
+import { FaPlay, FaPlus, FaAngleLeft } from 'react-icons/fa6';
+import TrailerEmbed from './trailerEmbed';
 
-const ItemsDetailsCard = ({
+const ItemsDetails = ({
   backdrop_path,
   poster_path,
   title,
@@ -17,6 +18,7 @@ const ItemsDetailsCard = ({
   runtime,
   genres = [],
   cast = [],
+  trailer, 
 }) => {
   const navigate = useNavigate();
 
@@ -24,7 +26,7 @@ const ItemsDetailsCard = ({
     <div className="relative">
       <button
         onClick={() => navigate(-1)}
-        className="mb-4 flex items-center text-center gap-5 text-yellow-500 z-10 top-4 left-11 font-bold px-4 py-2 rounded absolute"
+        className="mb-4 flex items-center text-center gap-5 text-gray-100 hover:text-yellow-500 transition delay-150 ease-in-out z-10 top-4 left-11 font-bold px-4 py-2 rounded absolute"
       >
         <FaAngleLeft /> Back
       </button>
@@ -57,9 +59,34 @@ const ItemsDetailsCard = ({
                 Rating - {vote_average.toFixed(1)}
               </p>
             )}
-            <p className="text-gray-200 mt-4 text-sm text-justify">
-              {overview || 'No description available.'}
-            </p>
+            {/* WatchList */}
+            <div className="text-sm text-gray-100 mt-5 flex flex-col-reverse gap-4 justify-center lg:justify-left md:justify-left">
+              <div>
+                <h3 className="mb-3 text-yellow-500 text-base">Add to WatchList</h3>
+                <button className="border border-yellow-500 px-3 py-2 rounded w-10">
+                  <FaPlus />
+                </button>
+              </div>
+
+              {/* Show View Trailer button only if trailer exists */}
+              {trailer ? (
+                <TrailerEmbed trailer={trailer?.key} />
+              ) : (
+                <button
+                  disabled
+                  className="bg-gray-600 text-gray-400 font-bold px-3 py-2 rounded flex items-center gap-3 cursor-not-allowed"
+                >
+                  <FaPlay />
+                  No Trailer Available
+                </button>
+              )}
+            </div>
+            <div className='py-4 mt-6'>
+              <p className="mb-3 text-yellow-500 text-base">Overview </p>
+              <p className="text-gray-200 mt-4 text-sm text-justify">
+                {overview || 'No description available.'}
+              </p>
+            </div>
             {release_date && (
               <p className="text-yellow-500 mt-2">Released - {release_date}</p>
             )}
@@ -146,15 +173,6 @@ const ItemsDetailsCard = ({
                 )}
               </ul>
             </div>
-            <div className="text-sm text-gray-100 mt-5 flex gap-4 justify-center lg:justify-left md:justify-left">
-              <button className="border border-yellow-500 px-3 py-2 rounded">
-                <FaPlus />
-              </button>
-              <button className="bg-yellow-500 text-black font-bold px-3 py-2 rounded flex items-center gap-3">
-                <FaPlay />
-                View Trailer
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -162,4 +180,4 @@ const ItemsDetailsCard = ({
   );
 };
 
-export default ItemsDetailsCard;
+export default ItemsDetails;
