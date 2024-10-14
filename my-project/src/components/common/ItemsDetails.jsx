@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { FaPlay, FaPlus, FaAngleLeft } from 'react-icons/fa6';
-import TrailerEmbed from './trailerEmbed';
+import YoutubeTrailerEmbed from './YoutubeTrailerEmbed';
 
 const ItemsDetails = ({
   backdrop_path,
