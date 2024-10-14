@@ -53,8 +53,14 @@ const SearchBar = () => {
   }, [query, navigate]);
 
   return (
-    <form onSubmit={handleSearch} className="flex mt-2 md:mt-0 lg:mt-0" aria-label="Search Form">
-      <label htmlFor="search-input" className="sr-only">Search for a movie or TV show</label>
+    <form
+      onSubmit={handleSearch}
+      className="flex mt-2 md:mt-0 lg:mt-0"
+      aria-label="Search Form"
+    >
+      <label htmlFor="search-input" className="sr-only">
+        Search for a movie or TV show
+      </label>
       <input
         id="search-input"
         type="text"
@@ -99,7 +105,8 @@ const SearchBar = () => {
       </button>
       {/* Display error message */}
       {error && (
-        <p className="text-red-500 mt-2 text-sm" role="alert">
+        <p
+          className="text-gray-500 w-96 bg-gray-100 py-10 px-20 shadow">
           {error}
         </p>
       )}

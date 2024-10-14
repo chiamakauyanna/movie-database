@@ -8,7 +8,7 @@ const ItemsDetailsList = ({ details, cast, trailer, loading, error }) => {
         <Loading />
       ) : error ? (
         <div className="flex justify-center my-28 min-h-screen">
-          <p className="text-red-500 max-w-md text-center px-4">{error}</p>
+          <p className="text-gray-500 w-96 bg-gray-100 py-10 px-20 shadow">{error}</p>
         </div>
       ) : (
         details && (

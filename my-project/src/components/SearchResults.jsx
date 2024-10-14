@@ -81,7 +81,7 @@ const SearchResults = () => {
       {/* No Results Found */}
       {movies.length === 0 && tvShows.length === 0 && (
         <div className="w-full flex justify-center my-28 h-screen">
-          <p className="text-red-500 text-center text-lg">
+          <p className="text-gray-500 w-96 bg-gray-100 py-10 px-20 shadow">
             No results found for "{query}". Please try a different search term.
           </p>
         </div>
