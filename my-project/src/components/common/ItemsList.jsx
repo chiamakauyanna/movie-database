@@ -1,8 +1,8 @@
+import { useRef, useState, useEffect } from 'react';
 import ItemsCard from './ItemsCard';
 import LoadMoreContent from './LoadMoreContent';
 import Loading from './Loading';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { useRef } from 'react';
 
 const ItemsList = ({
   title,
@@ -13,7 +13,9 @@ const ItemsList = ({
   loadMore,
 }) => {
   const scrollRef = useRef(); // Create a reference for the scrollable container
+  const [scrollPos, setScrollPos] = useState(0); // State to store scroll position
 
+  // Scroll function to handle left and right scrolling
   const scroll = (direction) => {
     if (scrollRef.current) {
       const scrollAmount = direction === 'left' ? -300 : 300; // Adjust scroll amount as needed
@@ -21,19 +23,32 @@ const ItemsList = ({
     }
   };
 
+  // Save the current scroll position before loading more content
+  const handleLoadMore = () => {
+    if (scrollRef.current) {
+      setScrollPos(scrollRef.current.scrollLeft); // Save current scroll position
+    }
+    loadMore(); // Trigger load more function
+  };
+
+  // Restore scroll position after re-render (once items change)
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft = scrollPos; // Restore previous scroll position
+    }
+  }, [items, scrollPos]); // Run when items change
+
   return (
     <div className="relative">
       <h2 className="pb-1 text-md text-gray-100 pl-4">{title}</h2>
       <div className="flex items-center flex-col">
-        {/* Scrollable container */}
         <div className="overflow-x-auto no-scrollbar w-full" ref={scrollRef}>
-          {/* Ensuring that the ul container has enough width to allow scrolling */}
           <ul className="flex gap-3 ml-5 py-4 w-max">
             {loading ? (
               <Loading />
             ) : error ? (
               <div className="flex justify-center w-screen h-screen py-9">
-                <p className="text-red-500 w-80">{error}</p>
+                <p className="text-gray-500 w-96 bg-gray-100 py-10 px-20 shadow">{error}</p>
               </div>
             ) : (
               <>
@@ -51,7 +66,7 @@ const ItemsList = ({
               </>
             )}
             {!loading && !error && items.length > 0 && (
-              <LoadMoreContent onClick={loadMore} />
+              <LoadMoreContent onClick={handleLoadMore} />
             )}
           </ul>
         </div>
@@ -64,7 +79,7 @@ const ItemsList = ({
           >
             <FaChevronLeft size={15} />
           </button>
-          <p className="text-yellow-500 font-bold">Swipe</p>
+          <p className="text-yellow-500 font-bold">Scroll</p>
           <button
             onClick={() => scroll('right')}
             className="text-gray-200 hover:text-yellow-500"
