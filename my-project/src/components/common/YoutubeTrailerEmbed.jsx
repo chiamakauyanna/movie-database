@@ -14,7 +14,7 @@ const YoutubeTrailerEmbed = ({ trailer }) => (
   </div>
 );
 
-TrailerEmbed.propTypes = {
+YoutubeTrailerEmbed.propTypes = {
   trailer: PropTypes.string.isRequired,
 };
 

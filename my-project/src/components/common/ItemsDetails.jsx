@@ -70,7 +70,7 @@ const ItemsDetails = ({
 
               {/* Show View Trailer button only if trailer exists */}
               {trailer ? (
-                <TrailerEmbed trailer={trailer?.key} />
+                <YoutubeTrailerEmbed trailer={trailer?.key} />
               ) : (
                 <button
                   disabled
