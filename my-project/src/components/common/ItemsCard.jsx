@@ -1,4 +1,6 @@
-const ItemsCard = ({
+import React from "react";
+
+const ItemsCard = React.memo(({
   id,
   poster_path,
   title,
@@ -8,21 +10,25 @@ const ItemsCard = ({
 }) => {
   return (
     <li
-      className="rounded cursor-pointer flex flex-col w-[92px] md:w-[154px] max-w-[185px] flex-shrink-0 shadow-lg pb-6 "
+      className="rounded cursor-pointer flex flex-col w-[92px] md:w-[154px] lg:w-[185px] flex-shrink-0 shadow-lg pb-6 "
       onClick={() => onClick(id)} // Navigate to details on click
       tabIndex={0} // Allow keyboard navigation
       onKeyPress={(e) => {
-        if (e.key === 'Enter') onClick();
+        if (e.key === 'Enter') onClick(id);
       }} // Handle Enter key for accessibility
+      aria-label={`View details for ${title}`}
     >
       <img
         src={`https://image.tmdb.org/t/p/w185${poster_path}`}
         alt={title || 'Poster'}
         loading="lazy"
-        className="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
+        className="rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-300"
+        onError={(e) => {
+          e.target.src = 'https://placehold.co/600x400?text=Default+Image';
+        }}
       />
       <div className="shadow truncate ">
-        <h2 className="text-white font-medium py-3 lg:text-base md:text-1xl text-xs flex ">
+        <h2 className="text-gray-100 font-medium py-3 md:text-base lg:text-1xl text-xs">
           {title}
         </h2>
         <div className="text-xs flex justify-between">
@@ -36,6 +42,6 @@ const ItemsCard = ({
       </div>
     </li>
   );
-};
+});
 
 export default ItemsCard

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../common/Navbar';
+import Header from '../common/Header';
 import useFetchTvShows from '../../hooks/useFetchTvShows';
 import ItemsList from '../common/ItemsList';
 
@@ -23,7 +23,8 @@ const TvShows = () => {
 
   return (
     <div className="container max-w-none">
-      <Navbar />
+      <Header
+     />
       {/* Display a single error message if applicable */}
       {error ? (
         <div className="flex justify-center w-screen h-screen py-9  items-center">

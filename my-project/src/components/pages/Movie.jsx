@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../common/Navbar';
+import Header from '../common/Header';
 import useFetchMovies from '../../hooks/useFetchMovies';
 import ItemsList from '../common/ItemsList';
 
 const Movie = () => {
   const navigate = useNavigate();
+  // destructure multiple values from the useFetchMovies hook
   const {
     movies,
     nowPlayingMovies,
@@ -21,12 +22,9 @@ const Movie = () => {
     navigate(`/movie/${id}`);
   };
 
-  // Combine the error messages from all lists into one
-  const hasError = error && !loading; // True if there is an error and not loading
-
   return (
     <div className="container max-w-none">
-      <Navbar />
+      <Header />
       {/* Display a single error message if applicable */}
       {error ? (
         <div className="flex justify-center w-screen h-screen py-9  items-center">

@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 
 const YoutubeTrailerEmbed = ({ trailer }) => (
-  <div className="aspect-w-16 aspect-h-9 w-full h-[300px]">
+  <div className="aspect-w-16 aspect-h-9 w-full">
     <iframe
+      title="Trailer"
       className="w-full"
-      height="100%"
+      height="315"
       src={`https://www.youtube.com/embed/${trailer}`}
       frameBorder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
-      title="YouTube video player"
     />
   </div>
 );

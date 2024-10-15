@@ -25,6 +25,7 @@ const ItemsDetails = ({
   return (
     <div className="relative">
       <button
+        aria-label="Go back"
         onClick={() => navigate(-1)}
         className="mb-4 flex items-center text-center gap-5 text-gray-100 hover:text-yellow-500 transition delay-150 ease-in-out z-10 top-4 left-11 font-bold px-4 py-2 rounded absolute"
       >
@@ -62,7 +63,9 @@ const ItemsDetails = ({
             {/* WatchList */}
             <div className="text-sm text-gray-100 mt-5 flex flex-col-reverse gap-4 justify-center lg:justify-left md:justify-left">
               <div>
-                <h3 className="mb-3 text-yellow-500 text-base">Add to WatchList</h3>
+                <h3 className="mb-3 text-yellow-500 text-base">
+                  Add to WatchList
+                </h3>
                 <button className="border border-yellow-500 px-3 py-2 rounded w-10">
                   <FaPlus />
                 </button>
@@ -81,7 +84,7 @@ const ItemsDetails = ({
                 </button>
               )}
             </div>
-            <div className='py-4 mt-6'>
+            <div className="py-4 mt-6">
               <p className="mb-3 text-yellow-500 text-base">Overview </p>
               <p className="text-gray-200 mt-4 text-sm text-justify">
                 {overview || 'No description available.'}

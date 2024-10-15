@@ -4,7 +4,7 @@ import SideBar from './SideBar';
 import { FaBars } from 'react-icons/fa6';
 import Logo from './Logo';
 
-const Navbar = () => {
+const Header = () => {
   // State to control sidebar visibility
   const [toggle, setToggle] = useState(false);
 
@@ -32,4 +32,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;

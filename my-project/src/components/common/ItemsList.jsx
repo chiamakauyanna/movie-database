@@ -3,6 +3,7 @@ import ItemsCard from './ItemsCard';
 import LoadMoreContent from './LoadMoreContent';
 import Loading from './Loading';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { debounce } from 'lodash';
 
 const ItemsList = ({
   title,
@@ -18,18 +19,21 @@ const ItemsList = ({
   // Scroll function to handle left and right scrolling
   const scroll = (direction) => {
     if (scrollRef.current) {
-      const scrollAmount = direction === 'left' ? -300 : 300; // Adjust scroll amount as needed
+      const scrollAmount =
+        direction === 'left'
+          ? -scrollRef.current.clientWidth * 0.8
+          : scrollRef.current.clientWidth * 0.8;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
 
   // Save the current scroll position before loading more content
-  const handleLoadMore = () => {
+  const handleLoadMore = debounce(() => {
     if (scrollRef.current) {
       setScrollPos(scrollRef.current.scrollLeft); // Save current scroll position
     }
     loadMore(); // Trigger load more function
-  };
+  }, 300); // 300ms debounce
 
   // Restore scroll position after re-render (once items change)
   useEffect(() => {
@@ -40,15 +44,17 @@ const ItemsList = ({
 
   return (
     <div className="relative">
-      <h2 className="pb-1 text-md text-gray-100 pl-4">{title}</h2>
+      <h2 className="pb-1 text-2xl text-gray-100 pl-4">{title}</h2>
       <div className="flex items-center flex-col">
         <div className="overflow-x-auto no-scrollbar w-full" ref={scrollRef}>
           <ul className="flex gap-3 ml-5 py-4 w-max">
-            {loading ? (
+            {loading && items.length === 0 ? (
               <Loading />
             ) : error ? (
               <div className="flex justify-center w-screen h-screen py-9">
-                <p className="text-gray-500 w-96 bg-gray-100 py-10 px-20 shadow">{error}</p>
+                <p className="text-gray-500 w-96 bg-gray-100 py-10 px-20 shadow">
+                  {error}
+                </p>
               </div>
             ) : (
               <>
@@ -75,14 +81,16 @@ const ItemsList = ({
         <div className="flex gap-4">
           <button
             onClick={() => scroll('left')}
-            className="text-gray-200 hover:text-yellow-500"
+            className="text-gray-200 hover:text-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            aria-label="Scroll Left"
           >
             <FaChevronLeft size={15} />
           </button>
-          <p className="text-yellow-500 font-bold">Scroll</p>
+          <p className="text-yellow-500 text-sm  font-bold">Prev - Next</p>
           <button
             onClick={() => scroll('right')}
-            className="text-gray-200 hover:text-yellow-500"
+            className="text-gray-200 hover:text-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            aria-label="Scroll Right"
           >
             <FaChevronRight size={15} />
           </button>
