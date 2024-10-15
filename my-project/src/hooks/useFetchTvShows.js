@@ -20,42 +20,61 @@ const useFetchTvShows = (initialPage = 1) => {
   };
 
   // Use Promise.all to fetch all data in parallel to reduce total loading time.
+ useEffect(() => {
+   let isMounted = true; // Flag to check if component is mounted
 
-  useEffect(() => {
-    const getTvShows = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const [
-          TvShowsData,
-          OnTheAirData,
-          trendingTvShowsData,
-          TopRatedData,
-          popularData,
-        ] = await Promise.all([
-          fetchTvShows(page),
-          fetchOnTheAirTvShows(page),
-          fetchTopRatedTvShows(page),
-          fetchTrendingTvShows(page),
-          fetchPopularTvShows(page),
-        ]);
+   const getTvShows = async () => {
+     setLoading(true);
+     setError(null);
+     try {
+       const [
+         TvShowsData,
+         OnTheAirData,
+         trendingTvShowsData,
+         TopRatedData,
+         popularData,
+       ] = await Promise.all([
+         fetchTvShows(page),
+         fetchOnTheAirTvShows(page),
+         fetchTopRatedTvShows(page),
+         fetchTrendingTvShows(page),
+         fetchPopularTvShows(page),
+       ]);
 
-        setTvShows((prev) => [...prev, ...TvShowsData]);
-        setOnTheAirTvShows((prev) => [...prev, ...OnTheAirData]);
-        setTopRatedTvShows((prev) => [...prev, ...TopRatedData]);
-        setTrendingTvShows((prev) => [...prev, ...trendingTvShowsData]);
-        setPopularTvShows((prev) => [...prev, ...popularData]);
-      } catch (err) {
-        setError(
-          "Uh-oh! We couldn't load the content. Please check your connection or try again later."
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
+       if (isMounted) {
+         // Only update state if component is still mounted
+         setTvShows((prev) => [...prev, ...TvShowsData]);
+         setOnTheAirTvShows((prev) => [...prev, ...OnTheAirData]);
+         setTopRatedTvShows((prev) => [...prev, ...TopRatedData]);
+         setTrendingTvShows((prev) => [...prev, ...trendingTvShowsData]);
+         setPopularTvShows((prev) => [...prev, ...popularData]);
+       }
+     } catch (err) {
+       if (isMounted) {
+         if (err.response) {
+           setError(
+             `Server Error: ${err.response.status} ${err.response.statusText}`
+           );
+         } else if (err.request) {
+           setError('Network Error: Please check your internet connection.');
+         } else {
+           setError('An unexpected error occurred.');
+         }
+       }
+     } finally {
+       if (isMounted) {
+         setLoading(false);
+       }
+     }
+   };
 
-    getTvShows();
-  }, [page]);
+   getTvShows();
+
+   // Cleanup function to set isMounted to false when component unmounts
+   return () => {
+     isMounted = false;
+   };
+ }, [page]);
 
   return {
     tvshows,

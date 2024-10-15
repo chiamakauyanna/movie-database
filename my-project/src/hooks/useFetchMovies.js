@@ -17,7 +17,13 @@ const useFetchMovies = (initialPage = 1) => {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(initialPage);
 
+  const loadMore = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
   useEffect(() => {
+    let isMounted = true; // Flag to check if component is mounted
+
     const getMovies = async () => {
       setLoading(true);
       setError(null);
@@ -30,7 +36,7 @@ const useFetchMovies = (initialPage = 1) => {
           topRatedData,
           popularData,
           trendingData,
-          upcomingData
+          upcomingData,
         ] = await Promise.all([
           fetchMovies(page),
           fetchNowplayingMovies(page),
@@ -40,22 +46,43 @@ const useFetchMovies = (initialPage = 1) => {
           fetchUpcomingMovies(page),
         ]);
 
-        setMovies((prev) => [...prev, ...moviesData]);
-        setNowPlayingMovies((prev) => [...prev, ...nowPlayingData]);
-        setTopRatedMovies((prev) => [...prev, ...topRatedData]);
-        setPopularMovies((prev) => [...prev, ...popularData]);
-        setTrendingMovies((prev) => [...prev, ...trendingData]);
-        setUpcomingMovies((prev) => [...prev, ...upcomingData]);
+        if (isMounted) {
+          // Only update state if component is still mounted
+          setMovies((prev) => [...prev, ...moviesData]);
+          setNowPlayingMovies((prev) => [...prev, ...nowPlayingData]);
+          setTopRatedMovies((prev) => [...prev, ...topRatedData]);
+          setPopularMovies((prev) => [...prev, ...popularData]);
+          setTrendingMovies((prev) => [...prev, ...trendingData]);
+          setUpcomingMovies((prev) => [...prev, ...upcomingData]);
+        }
       } catch (err) {
-        setError(
-          "Uh-oh! We couldn't load the content. Please check your connection or try again later."
-        );
+        if (isMounted) {
+          if (err.response) {
+            // Server responded with a status other than 2xx
+            setError(
+              `Server Error: ${err.response.status} ${err.response.statusText}`
+            );
+          } else if (err.request) {
+            // Request was made but no response received
+            setError('Network Error: Please check your internet connection.');
+          } else {
+            // Something else caused the error
+            setError('An unexpected error occurred.');
+          }
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     getMovies();
+
+    // Cleanup function to set isMounted to false when component unmounts
+    return () => {
+      isMounted = false;
+    };
   }, [page]);
 
   return {
@@ -67,7 +94,7 @@ const useFetchMovies = (initialPage = 1) => {
     topRatedMovies,
     loading,
     error,
-    setPage
+    loadMore,
   };
 };
 
