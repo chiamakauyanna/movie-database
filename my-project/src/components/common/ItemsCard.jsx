@@ -2,7 +2,7 @@ const ItemsCard = ({
   id,
   poster_path,
   title,
-  release_date,
+  release_dat e,
   vote_average,
   onClick,
 }) => {
