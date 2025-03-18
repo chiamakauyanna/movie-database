@@ -19,9 +19,8 @@ const useFetchTvShows = (initialPage = 1) => {
     setPage((prevPage) => prevPage + 1);
   };
 
-  // Use Promise.all to fetch all data in parallel to reduce total loading time.
  useEffect(() => {
-   let isMounted = true; // Flag to check if component is mounted
+   let isMounted = true; 
 
    const getTvShows = async () => {
      setLoading(true);
@@ -42,7 +41,6 @@ const useFetchTvShows = (initialPage = 1) => {
        ]);
 
        if (isMounted) {
-         // Only update state if component is still mounted
          setTvShows((prev) => [...prev, ...TvShowsData]);
          setOnTheAirTvShows((prev) => [...prev, ...OnTheAirData]);
          setTopRatedTvShows((prev) => [...prev, ...TopRatedData]);
@@ -70,7 +68,6 @@ const useFetchTvShows = (initialPage = 1) => {
 
    getTvShows();
 
-   // Cleanup function to set isMounted to false when component unmounts
    return () => {
      isMounted = false;
    };

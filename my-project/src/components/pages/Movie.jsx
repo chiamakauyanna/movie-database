@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import Header from '../common/Header';
 import useFetchMovies from '../../hooks/useFetchMovies';
 import ItemsList from '../common/ItemsList';
+import Header from '../../layout/Header';
 
 const Movie = () => {
   const navigate = useNavigate();

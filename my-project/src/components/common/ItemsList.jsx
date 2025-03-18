@@ -13,10 +13,8 @@ const ItemsList = ({
   onItemClick,
   loadMore,
 }) => {
-  const scrollRef = useRef(); // Create a reference for the scrollable container
-  const [scrollPos, setScrollPos] = useState(0); // State to store scroll position
-
-  // Scroll function to handle left and right scrolling
+  const scrollRef = useRef(); 
+  const [scrollPos, setScrollPos] = useState(0); 
   const scroll = (direction) => {
     if (scrollRef.current) {
       const scrollAmount =
@@ -27,20 +25,19 @@ const ItemsList = ({
     }
   };
 
-  // Save the current scroll position before loading more content
   const handleLoadMore = debounce(() => {
     if (scrollRef.current) {
-      setScrollPos(scrollRef.current.scrollLeft); // Save current scroll position
+      setScrollPos(scrollRef.current.scrollLeft);
     }
-    loadMore(); // Trigger load more function
-  }, 300); // 300ms debounce
+    loadMore(); 
+  }, 300); 
 
   // Restore scroll position after re-render (once items change)
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollLeft = scrollPos; // Restore previous scroll position
+      scrollRef.current.scrollLeft = scrollPos;
     }
-  }, [items, scrollPos]); // Run when items change
+  }, [items, scrollPos]);
 
   return (
     <div className="relative">

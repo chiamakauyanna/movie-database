@@ -1,6 +1,4 @@
-import React from "react";
-
-const ItemsCard = React.memo(({
+const ItemsCard = ({
   id,
   poster_path,
   title,
@@ -11,11 +9,11 @@ const ItemsCard = React.memo(({
   return (
     <li
       className="rounded cursor-pointer flex flex-col w-[92px] md:w-[154px] lg:w-[185px] flex-shrink-0 shadow-lg pb-6 "
-      onClick={() => onClick(id)} // Navigate to details on click
-      tabIndex={0} // Allow keyboard navigation
+      onClick={() => onClick(id)}
+      tabIndex={0}
       onKeyPress={(e) => {
         if (e.key === 'Enter') onClick(id);
-      }} // Handle Enter key for accessibility
+      }}
       aria-label={`View details for ${title}`}
     >
       <img
@@ -42,6 +40,6 @@ const ItemsCard = React.memo(({
       </div>
     </li>
   );
-});
+};
 
-export default ItemsCard
+export default ItemsCard;

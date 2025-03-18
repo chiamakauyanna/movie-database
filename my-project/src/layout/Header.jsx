@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import SearchBar from './SearchBar';
+import SearchBar from '../components/common/SearchBar';
 import SideBar from './SideBar';
 import { FaBars } from 'react-icons/fa6';
-import Logo from './Logo';
+import Logo from '../components/common/Logo';
 
 const Header = () => {
-  // State to control sidebar visibility
   const [toggle, setToggle] = useState(false);
-
-  // Function to toggle the sidebar
   const toggleMenu = () => {
     setToggle(!toggle);
   };

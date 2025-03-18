@@ -2,14 +2,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FaAngleLeft } from 'react-icons/fa';
 import ItemsCard from './common/ItemsCard';
 import Loading from './common/Loading';
-import { useState, useEffect } from 'react'; // Import useEffect
+import { useState, useEffect } from 'react'; 
 
 const SearchResults = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Destructure searchResults and query from location.state with fallbacks
+
   const { searchResults, query } = location.state || {
     searchResults: { movies: [], tvShows: [] },
     query: '',
@@ -17,7 +17,6 @@ const SearchResults = () => {
 
   const { movies, tvShows } = searchResults;
 
-  // Function to handle item clicks, navigating based on type
   const onItemClick = (id, type) => {
     if (type === 'movie') {
       navigate(`/movie/${id}`);
@@ -26,7 +25,6 @@ const SearchResults = () => {
     }
   };
 
-  // useEffect to set loading to false after data is available
   useEffect(() => {
     console.log('SearchResults component mounted with:', {
       searchResults,
@@ -38,7 +36,6 @@ const SearchResults = () => {
       console.log('Loading set to false');
     } else {
       console.log('No search data, redirecting to home');
-      // Optionally, inform the user before redirecting
       alert('No search data found. Redirecting to the search page.');
       navigate('/', {
         replace: true,
@@ -55,7 +52,7 @@ const SearchResults = () => {
         <>
           {/* Back Button */}
           <button
-            onClick={() => navigate(-1)} // Navigate back to the previous page
+            onClick={() => navigate(-1)} 
             className="mb-4 flex items-center text-center gap-5 text-yellow-500 font-bold mt-9 ml-9 hover:text-yellow-600 transition-colors duration-200"
             aria-label="Go Back to Previous Page"
           >

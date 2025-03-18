@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import Header from '../common/Header';
+import Header from '../../layout/Header';
 import useFetchTvShows from '../../hooks/useFetchTvShows';
 import ItemsList from '../common/ItemsList';
 

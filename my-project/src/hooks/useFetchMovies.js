@@ -22,13 +22,12 @@ const useFetchMovies = (initialPage = 1) => {
   };
 
   useEffect(() => {
-    let isMounted = true; // Flag to check if component is mounted
+    let isMounted = true; 
 
     const getMovies = async () => {
       setLoading(true);
       setError(null);
 
-      // Use Promise.all to fetch all data in parallel to reduce total loading time.
       try {
         const [
           moviesData,
@@ -47,7 +46,6 @@ const useFetchMovies = (initialPage = 1) => {
         ]);
 
         if (isMounted) {
-          // Only update state if component is still mounted
           setMovies((prev) => [...prev, ...moviesData]);
           setNowPlayingMovies((prev) => [...prev, ...nowPlayingData]);
           setTopRatedMovies((prev) => [...prev, ...topRatedData]);
@@ -58,15 +56,12 @@ const useFetchMovies = (initialPage = 1) => {
       } catch (err) {
         if (isMounted) {
           if (err.response) {
-            // Server responded with a status other than 2xx
             setError(
               `Server Error: ${err.response.status} ${err.response.statusText}`
             );
           } else if (err.request) {
-            // Request was made but no response received
             setError('Network Error: Please check your internet connection.');
           } else {
-            // Something else caused the error
             setError('An unexpected error occurred.');
           }
         }
@@ -78,8 +73,7 @@ const useFetchMovies = (initialPage = 1) => {
     };
 
     getMovies();
-
-    // Cleanup function to set isMounted to false when component unmounts
+    
     return () => {
       isMounted = false;
     };

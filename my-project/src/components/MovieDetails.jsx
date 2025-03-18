@@ -3,8 +3,8 @@ import ItemsDetailsList from './common/ItemsDetailsList';
 import useFetchDetails from '../hooks/useFetchDetails'
 
 const MovieDetails = () => {
-  const { id } = useParams(); // Get the movie ID from the URL
-  const { details: movie, cast, loading, error, trailer } = useFetchDetails('movie', id); // Use the hook for movies
+  const { id } = useParams(); 
+  const { details: movie, cast, loading, error, trailer } = useFetchDetails('movie', id);
 
   return (
     <div className="container min-w-full">

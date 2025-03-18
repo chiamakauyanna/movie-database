@@ -14,7 +14,6 @@ const SearchBar = () => {
   const handleSearch = useCallback(
    async (e) => {
       e.preventDefault();
-      // Trim the search query and exits early if it's empty
       const trimmedQuery = query.trim();
       if (!trimmedQuery) return;
 
@@ -42,18 +41,15 @@ const SearchBar = () => {
           tvShows: tvShowsResult.data.results,
         };
 
-        // Navigate to the SearchResults component and pass the search results as state
         navigate('/search-results', {
           state: { searchResults, query: trimmedQuery },
         });
       } catch (err) {
         if (err.response) {
-          // Server responded with a status other than 2xx
           setError(
             `Server Error: ${err.response.status} ${err.response.statusText}`
           );
         } else if (err.request) {
-          // Request was made but no response received
           setError('Network Error: Please check your internet connection.');
         } else if (
           searchResults.movies.length === 0 &&
@@ -61,7 +57,6 @@ const SearchBar = () => {
         ) {
           setError('No results found for your search.');
         } else {
-          // Something else caused the error
           setError('An unexpected error occurred.');
         }
       } finally {
@@ -94,7 +89,7 @@ const SearchBar = () => {
         className={`flex items-center justify-center text-gray-100 px-4 bg-yellow-500 border border-[#1E1E1E] rounded-r-lg transition ${
           loading ? 'cursor-not-allowed opacity-50' : 'hover:bg-yellow-600'
         }`}
-        disabled={loading} // Disable button while loading
+        disabled={loading}
         aria-label="Search Button"
       >
         {loading ? (
