@@ -36,7 +36,7 @@ const ItemsCard = ({
             </p>
           )}
           <p className="bg-yellow-500 font-bold rounded px-1 text-xs">
-            {vote_average ? vote_average.toFixed(1) : "0.0"}
+            {vote_average ? Number(vote_average).toFixed(1) : "0.0"}
           </p>
         </div>
       </div>

@@ -1,6 +1,7 @@
+import { MovieOptionsProps } from "@/interfaces/interfaces";
 import React from "react";
 
-const TvOptions = ({ onChange, value }) => {
+const TvOptions: React.FC<MovieOptionsProps> = ({ onChange, value }) => {
   return (
     <div className="text-text">
       <select
@@ -13,8 +14,8 @@ const TvOptions = ({ onChange, value }) => {
         <option value="all">Show All</option>
         <option value="popular">Popular</option>
         <option value="airing">Airing Today</option>
-        <option value="on-air">On TV</option>
-        <option value="top-rated">Top Rated</option>
+        <option value="on_air">On TV</option>
+        <option value="top_rated">Top Rated</option>
       </select>
     </div>
   );

@@ -10,7 +10,11 @@ export const fetchFromAPI = async (endpoint: string, id: number) => {
     );
     return response.data;
   } catch (error) {
-    console.error("API Error:", error.response?.data || error.message);
+    if (axios.isAxiosError(error)) {
+      console.error("API Error:", error.response?.data || error.message);
+    } else {
+      console.error("Unexpected Error:", (error as Error).message);
+    }
     throw new Error("Failed to fetch data");
   }
 };

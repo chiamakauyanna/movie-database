@@ -1,30 +1,29 @@
-import { Details } from "@/interfaces/interfaces";;
+import { Movie } from "@/interfaces/interfaces";;
 import { fetchMoviesSearch, fetchTvSeriesSearch } from "@/services/SearchService";
 import { create } from "zustand";
 
-interface DetailsStore {
-  details: Details | null;
+interface SearchStore {
+  searchResults: Movie[];
   loading: boolean;
   error: string | null;
-  getSearchDetails: (type: "movie" | "tv", query: string) => Promise<void>;
+  getSearchDetails: ( query: string) => Promise<void>;
 }
 
-export const useSearchStore = create<DetailsStore>((set) => ({
-  details: null,
+export const useSearchStore = create<SearchStore>((set) => ({
+  searchResults: [],
   loading: false,
   error: null,
 
-  getSearchDetails: async (type, query) => {
+  getSearchDetails: async (query) => {
     set({ loading: true, error: null });
+    
     try {
-      const details =
-        type === "movie"
-          ? await fetchMoviesSearch(query)
-          : await fetchTvSeriesSearch(query);
-      set({ details, loading: false });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const movies = await fetchMoviesSearch(query);
+      const tvShows = await fetchTvSeriesSearch(query);
+
+      set({ searchResults: [...movies, ...tvShows], loading: false });
     } catch (error) {
-      set({ loading: false, error: `Failed to fetch ${type} details` });
+      set({ loading: false, error: "Failed to fetch search results" });
     }
   },
 }));

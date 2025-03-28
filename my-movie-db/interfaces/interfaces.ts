@@ -1,19 +1,19 @@
 import { ReactNode } from "react";
-import { NextRouter } from "next/router";
 
 export interface LayoutProp {
   children: ReactNode;
 }
 
 export interface Movie {
+  name?: string;
   id?: number;
-  title: string;
+  title?: string;
   overview?: string;
   poster_path: string;
-  release_date?: number;
+  release_date?: number | string;
   vote_average?: number | string;
-  onClick?: unknown;
-  first_air_date?: string
+  onClick?: (event: React.MouseEvent<HTMLLIElement>) => void;
+  first_air_date?: string | number;
 }
 
 export interface MovieState {
@@ -72,7 +72,7 @@ export interface Cast {
 export interface Details {
   backdrop_path?: string;
   belongs_to_collection?: string;
-  genres?: Genre[]; 
+  genres?: Genre[];
   id?: number;
   homepage?: string;
   imdb_id?: string;
@@ -89,7 +89,7 @@ export interface Details {
   video?: boolean;
   vote_average?: number;
   vote_count?: number;
-  cast?: Cast[]; 
+  cast?: Cast[];
   episode_run_time?: number[];
   first_air_date?: string;
   last_air_date?: string;
@@ -99,3 +99,7 @@ export interface Details {
   title?: string;
 }
 
+export interface MovieOptionsProps {
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  value: string;
+}

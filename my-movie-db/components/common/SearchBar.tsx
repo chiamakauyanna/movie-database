@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
 const SearchBar = () => {
-  const [query, setQuery] = useState('')
-  const search = useSearchStore((state) => state.details);
-  const getSearch = useSearchStore((state) => state.getSearchDetails);
+  const [query, setQuery] = useState('');
+  const getSearch = useSearchStore((state) => state.getSearchDetails ?? (() => {}));
 
   useEffect(() => {
     if(query){
@@ -17,8 +16,15 @@ const SearchBar = () => {
     setQuery(e.target.value)
   };
 
+  const handleSubmit= (e: React.FormEvent) => {
+    e.preventDefault()
+    if(query){
+      getSearch(query)
+    }
+  };
+
   return (
-    <form className="flex mt-2 md:mt-0 lg:mt-0">
+    <form className="flex mt-2 md:mt-0 lg:mt-0" onSubmit={handleSubmit}>
       <input
         id="search-input"
         type="text"

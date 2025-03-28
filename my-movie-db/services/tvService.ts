@@ -9,9 +9,12 @@ export const fetchFromAPI = async (endpoint: string) => {
       `${BASE_URL}/${endpoint}?api_key=${API_KEY}`
     );
     return response.data.results;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.error("API Error:", error.response?.data || error.message);
+    if (axios.isAxiosError(error)) {
+      console.error("API Error:", error.response?.data || error.message);
+    } else {
+      console.error("Unexpected Error:", (error as Error).message);
+    }
     throw new Error("Failed to fetch data");
   }
 };
