@@ -8,9 +8,9 @@ const useDetails = (type: "movie" | "tv") => {
   const id = router.query.id;
 
   const details = useDetailsStore((state) => state.details);
-  const getDetails = useDetailsStore((state) => state.getDetails);
+  const getDetails = useDetailsStore((state) => state.getDetails ?? (() => {}));
   const credits = useCreditsStore((state) => state.credits);
-  const getCredits = useCreditsStore((state) => state.getCredits);
+  const getCredits = useCreditsStore((state) => state.getCredits ?? (() => {}));
    const loading = useDetailsStore((state) => state.loading);
     const error = useDetailsStore((state) => state.error);
 
