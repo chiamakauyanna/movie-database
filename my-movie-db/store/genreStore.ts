@@ -1,5 +1,5 @@
 import { DetailsStore } from "@/interfaces/interfaces";
-import { fetchMoviesGenre, fetchTvSeriesGenre } from "@/services/enreService";
+import { fetchMoviesGenre, fetchTvSeriesGenre } from "@/services/genreService";
 
 import { create } from "zustand";
 

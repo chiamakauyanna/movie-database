@@ -2,7 +2,7 @@ import { DetailsStore } from "@/interfaces/interfaces";
 import {
   fetchMoviesCredits,
   fetchTvSeriesCredits,
-} from "@/services/reditsService";
+} from "@/services/creditsService";
 import { create } from "zustand";
 
 export const useCreditsStore = create<DetailsStore>((set) => ({

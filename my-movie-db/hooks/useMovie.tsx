@@ -1,5 +1,5 @@
-import { useMovieStore } from "@/store/ovieStore";
-import { useSearchStore } from "@/store/earchStore";
+import { useMovieStore } from "@/store/movieStore";
+import { useSearchStore } from "@/store/searchStore";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 

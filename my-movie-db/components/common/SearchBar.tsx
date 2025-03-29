@@ -1,4 +1,4 @@
-import { useSearchStore } from "@/store/earchStore";
+import { useSearchStore } from "@/store/searchStore";
 import { useEffect, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 

@@ -2,7 +2,7 @@ import { SearchStore } from "@/interfaces/interfaces";
 import {
   fetchMoviesSearch,
   fetchTvSeriesSearch,
-} from "@/services/earchService";
+} from "@/services/searchService";
 import { create } from "zustand";
 
 export const useSearchStore = create<SearchStore>((set) => ({

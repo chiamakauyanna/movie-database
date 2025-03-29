@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useDetailsStore } from "@/store/etailsStore";
-import { useCreditsStore } from "@/store/reditsStore";
+import { useDetailsStore } from "@/store/detailsStore";
+import { useCreditsStore } from "@/store/creditsStore";
 
 const useDetails = (type: "movie" | "tv") => {
   const router = useRouter();
