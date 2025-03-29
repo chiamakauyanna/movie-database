@@ -1,5 +1,5 @@
-import { useMovieStore } from "@/store/movieStore";
-import { useSearchStore } from "@/store/searchStore";
+import { useMovieStore } from "@/store/ovieStore";
+import { useSearchStore } from "@/store/earchStore";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
@@ -51,7 +51,13 @@ const useMovie = () => {
     getTopRatedMovies(1);
     getUpcomingMovies(1);
     getTrendingMovies(1);
-  }, [getMovies, getPopularMovies, getTopRatedMovies, getTrendingMovies, getUpcomingMovies]);
+  }, [
+    getMovies,
+    getPopularMovies,
+    getTopRatedMovies,
+    getTrendingMovies,
+    getUpcomingMovies,
+  ]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
@@ -83,15 +89,15 @@ const useMovie = () => {
     }
   };
 
-   const scrollRef = useRef<number>(0);
-    const handleLoadMore = () => {
-      scrollRef.current = window.scrollY; 
-      loadMore();
-    };
-  
-    useEffect(() => {
-      window.scrollTo({ top: scrollRef.current, behavior: "instant" }); 
-    }, [displayedMovies.length]);
+  const scrollRef = useRef<number>(0);
+  const handleLoadMore = () => {
+    scrollRef.current = window.scrollY;
+    loadMore();
+  };
+
+  useEffect(() => {
+    window.scrollTo({ top: scrollRef.current, behavior: "instant" });
+  }, [displayedMovies.length]);
 
   return {
     handleClick,

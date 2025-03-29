@@ -6,7 +6,7 @@ import {
   fetchTopRated,
   fetchTrending,
   fetchUpcoming,
-} from "../services/movieService";
+} from "../services/ovieService";
 
 export const useMovieStore = create<MovieState>()((set, get) => ({
   movie: [],

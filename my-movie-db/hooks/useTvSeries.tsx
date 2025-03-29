@@ -1,5 +1,5 @@
 import { useTvStore } from "@/store/tvStore";
-import { useSearchStore } from "@/store/searchStore";
+import { useSearchStore } from "@/store/earchStore";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
