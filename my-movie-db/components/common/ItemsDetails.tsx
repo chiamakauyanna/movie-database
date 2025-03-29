@@ -5,7 +5,6 @@ import React from "react";
 import { FaAngleLeft, FaPlus } from "react-icons/fa6";
 
 const ItemsDetails = (props: Details) => {
-
   const router = useRouter();
 
   return (
@@ -45,9 +44,15 @@ const ItemsDetails = (props: Details) => {
           </div>
 
           <div className="w-4/5 lg:w-1/2 flex flex-col flex-wrap p-4 lg:text-left md:text-left text-center">
-            <h2 className="text-2xl top-7 lg:text-3xl mb-7 text-gray-100 font-bold">
-              {props.title}
+            <h2 className="text-2xl top-7 lg:text-3xl mb-3 text-gray-100 font-bold">
+              {props.title || props.original_name}
             </h2>
+
+            {props.tagline && (
+              <p className="text-gray-400 italic text-sm mb-6">
+                {props.tagline}
+              </p>
+            )}
 
             {props.vote_average !== undefined && (
               <p className="bg-accent py-2 rounded w-48 text-center px-2">
@@ -55,10 +60,38 @@ const ItemsDetails = (props: Details) => {
               </p>
             )}
 
+            {props.homepage && (
+              <p className="text-accent mt-4">
+                <a
+                  href={props.homepage}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-blue-400"
+                >
+                  Official Website
+                </a>
+              </p>
+            )}
+
+            {props.imdb_id && (
+              <p className="text-accent mt-2">
+                <a
+                  href={`https://www.imdb.com/title/${props.imdb_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-yellow-400"
+                >
+                  View on IMDb
+                </a>
+              </p>
+            )}
+
             <div className="text-sm text-gray-100 mt-5 flex flex-col-reverse gap-4 justify-center lg:justify-left md:justify-left">
               <div>
                 <h3 className="mb-3 text-accent text-base">Add to WatchList</h3>
-                <button className="border border-accent px-3 py-2 rounded w-10">
+                <button
+                  className="border border-accent px-3 py-2 rounded w-10"
+                >
                   <FaPlus />
                 </button>
               </div>
@@ -74,6 +107,16 @@ const ItemsDetails = (props: Details) => {
             {props.release_date && (
               <p className="text-accent mt-2">
                 Released - {props.release_date}
+              </p>
+            )}
+
+            {props.status && (
+              <p className="text-accent mt-2">Status - {props.status}</p>
+            )}
+
+            {props.revenue !== undefined && (
+              <p className="text-accent mt-2">
+                Revenue - ${props.revenue.toLocaleString()}
               </p>
             )}
 
@@ -116,9 +159,9 @@ const ItemsDetails = (props: Details) => {
               </p>
             )}
 
-            {props.episode_run_time && (
+            {props.episode_run_time && props.episode_run_time.length > 0 && (
               <p className="text-accent mt-2">
-                Episode Duration - {props.episode_run_time[0] || "N/A"} minutes
+                Episode Duration - {props.episode_run_time[0]} minutes
               </p>
             )}
 

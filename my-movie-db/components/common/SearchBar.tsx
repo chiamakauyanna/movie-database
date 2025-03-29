@@ -1,25 +1,27 @@
-import { useSearchStore } from "@/store/SearchStore";
+import { useSearchStore } from "@/store/searchStore";
 import { useEffect, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
 const SearchBar = () => {
-  const [query, setQuery] = useState('');
-  const getSearch = useSearchStore((state) => state.getSearchDetails ?? (() => {}));
+  const [query, setQuery] = useState("");
+  const getSearch = useSearchStore(
+    (state) => state.getSearchDetails ?? (() => {})
+  );
 
   useEffect(() => {
-    if(query){
-      getSearch(query)
-    } 
-  }, [getSearch, query])
+    if (query) {
+      getSearch(query);
+    }
+  }, [getSearch, query]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value)
+    setQuery(e.target.value);
   };
 
-  const handleSubmit= (e: React.FormEvent) => {
-    e.preventDefault()
-    if(query){
-      getSearch(query)
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (query) {
+      getSearch(query);
     }
   };
 
@@ -29,7 +31,7 @@ const SearchBar = () => {
         id="search-input"
         type="text"
         placeholder="Search for a movie or TV show..."
-        className="px-4 lg:w-80 md:w-80 w-60 py-2 bg-foreground shadow text-gray-100 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-accent"
+        className="px-4 lg:w-80 md:w-80 w-60 py-2 bg-foreground shadow text-gray-100 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-accent lg:text-lg md:text-base text-sm"
         onChange={handleChange}
       />
       <button

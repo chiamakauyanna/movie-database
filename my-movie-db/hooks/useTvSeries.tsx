@@ -1,5 +1,5 @@
-import { useTvStore } from "@/store/TvShowStore";
-import { useSearchStore } from "@/store/SearchStore";
+import { useTvStore } from "@/store/tvStore";
+import { useSearchStore } from "@/store/searchStore";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -39,20 +39,20 @@ const useTvSeries = () => {
   }, []);
 
   const categoryMap: Record<string, typeof tvSeries> = {
-    airing:airingTvSeries,
+    airing: airingTvSeries,
     popular: popularTvSeries,
     top_rated: topRatedTvSeries,
     on_air: onAirTvSeries,
-  }
+  };
 
-const displayedTvSeries = categoryMap[selectedCategory] || tvSeries;
+  const displayedTvSeries = categoryMap[selectedCategory] || tvSeries;
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
   };
 
   const handleClick = (id: number, type: "movie" | "tv") => {
-    router.push(`/tvseries/${id}?type=${type}`);
+    router.push(`/tv/${id}?type=${type}`);
   };
 
   return {

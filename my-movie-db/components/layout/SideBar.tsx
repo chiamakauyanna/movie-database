@@ -1,33 +1,57 @@
 import Link from "next/link";
-import { FaThList } from "react-icons/fa";
-import { FaBookmark, FaFilm, FaHouse, FaTv } from "react-icons/fa6";
+import { useRouter } from "next/router";
+import { FaFilm, FaHouse, FaTv } from "react-icons/fa6";
 import Logo from "../common/Logo";
+import { useToggle } from "@/store/toggleStore";
+import { IoClose } from "react-icons/io5";
+import { useEffect } from "react";
 
 const SideBar = () => {
+  const router = useRouter();
+  const toggle = useToggle((state) => state.toggle);
+  const setToggle = useToggle((state) => state.setToggle);
+
   const menuItems = [
     { name: "Home", icon: <FaHouse />, route: "/" },
-    { name: "Movie", icon: <FaFilm />, route: "/movies/movies" },
-    { name: "TV Shows", icon: <FaTv />, route: "/tvseries/tvseries" },
-    { name: "Watchlist", icon: <FaBookmark />, route: "/watchlist" },
-    { name: "Genre", icon: <FaThList />, route: "/genre" },
+    { name: "Movie", icon: <FaFilm />, route: "/movies" },
+    { name: "TV Shows", icon: <FaTv />, route: "/tv" },
   ];
 
+  useEffect(() => {
+    setToggle(false);
+  }, [router.pathname, setToggle]);
+
   return (
-    <div className="flex-initial transform transition-transform duration-500 ease-out lg:w-lg md:w-lg w-52 lg:relative md:relative fixed bg-background h-screen">
-      <div className="py-6 px-9">
+    <div
+      className={`fixed bg-background h-screen transform transition-transform duration-500 ease-out
+    ${toggle ? "translate-x-0" : "-translate-x-full"} 
+    lg:relative md:relative lg:translate-x-0 md:translate-x-0 w-52`}
+    >
+      <div className="flex items-center justify-around pt-12">
         <Logo />
+        <div
+          className="lg:hidden md:hidden flex text-accent"
+          onClick={() => setToggle(false)}
+        >
+          <IoClose size={24}/>
+        </div>
       </div>
 
       <ul className="text-gray-500 flex flex-col gap-8 mt-20">
-        {menuItems.map((item, index) => (
-          <li
-            key={index}
-            className="ml-8 font-bold text-md flex items-center gap-4 transition duration-100 ease-in-out hover:text-accent"
-          >
-            {item.icon}
-            <Link href={item.route}>{item.name}</Link>
-          </li>
-        ))}
+        {menuItems.map((item, index) => {
+          const isActive = router.pathname === item.route;
+
+          return (
+            <li
+              key={index}
+              className={`ml-8 font-bold text-md flex items-center gap-4 transition duration-100 ease-in-out 
+                ${isActive ? "text-accent" : "hover:text-accent"}`}
+            >
+              {item.icon}
+              <Link href={item.route}>{item.name}</Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

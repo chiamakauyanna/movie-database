@@ -1,14 +1,7 @@
-import { Details } from "@/interfaces/interfaces";
-import { fetchMoviesGenre, fetchTvSeriesGenre } from "@/services/GenreService";
+import { DetailsStore } from "@/interfaces/interfaces";
+import { fetchMoviesGenre, fetchTvSeriesGenre } from "@/services/genreService";
 
 import { create } from "zustand";
-
-interface DetailsStore {
-  genre: Details | null;
-  loading: boolean;
-  error: string | null;
-  getGenre: (type: "movie" | "tv") => Promise<void>;
-}
 
 export const useGenreStore = create<DetailsStore>((set) => ({
   genre: null,

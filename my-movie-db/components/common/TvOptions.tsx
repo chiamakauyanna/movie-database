@@ -7,7 +7,7 @@ const TvOptions: React.FC<MovieOptionsProps> = ({ onChange, value }) => {
       <select
         name="sort"
         id="sort"
-        className="bg-foreground py-3 rounded-lg outline-0 focus:ring focus:ring-accent px-6"
+        className="bg-foreground py-3 rounded-lg outline-0 focus:ring focus:ring-accent px-6 lg:text-lg md:text-lg text-sm"
         onChange={onChange}
         value={value}
       >

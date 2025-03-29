@@ -1,13 +1,9 @@
-import { Movie } from "@/interfaces/interfaces";;
-import { fetchMoviesSearch, fetchTvSeriesSearch } from "@/services/SearchService";
+import { SearchStore } from "@/interfaces/interfaces";
+import {
+  fetchMoviesSearch,
+  fetchTvSeriesSearch,
+} from "@/services/searchService";
 import { create } from "zustand";
-
-interface SearchStore {
-  searchResults: Movie[];
-  loading: boolean;
-  error: string | null;
-  getSearchDetails: ( query: string) => Promise<void>;
-}
 
 export const useSearchStore = create<SearchStore>((set) => ({
   searchResults: [],
@@ -16,7 +12,7 @@ export const useSearchStore = create<SearchStore>((set) => ({
 
   getSearchDetails: async (query) => {
     set({ loading: true, error: null });
-    
+
     try {
       const movies = await fetchMoviesSearch(query);
       const tvShows = await fetchTvSeriesSearch(query);

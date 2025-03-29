@@ -1,5 +1,5 @@
-import { useMovieStore } from "@/store/MovieStore";
-import { useSearchStore } from "@/store/SearchStore";
+import { useMovieStore } from "@/store/movieStore";
+import { useSearchStore } from "@/store/searchStore";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -12,9 +12,15 @@ const useMovie = () => {
   const topRatedMovies = useMovieStore((state) => state.topRatedMovies);
   const upcomingMovies = useMovieStore((state) => state.upcomingMovies);
   const getMovies = useMovieStore((state) => state.getMovies ?? (() => {}));
-  const getPopularMovies = useMovieStore((state) => state.getPopularMovies ?? (() => {}));
-  const getTopRatedMovies = useMovieStore((state) => state.getTopRatedMovies ?? (() => {}));
-  const getUpcomingMovies = useMovieStore((state) => state.getUpcomingMovies ?? (() => {}));
+  const getPopularMovies = useMovieStore(
+    (state) => state.getPopularMovies ?? (() => {})
+  );
+  const getTopRatedMovies = useMovieStore(
+    (state) => state.getTopRatedMovies ?? (() => {})
+  );
+  const getUpcomingMovies = useMovieStore(
+    (state) => state.getUpcomingMovies ?? (() => {})
+  );
   const searchResults = useSearchStore((state) => state.searchResults);
   const [selectedCategory, setSelectedCategory] = useState("all");
 

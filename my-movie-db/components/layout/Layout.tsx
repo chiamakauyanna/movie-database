@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import Header from "./Header";
 import SideBar from "./SideBar";
 import Footer from "./Footer";
-import Loading from "../common/Loading";
+import Loading from "../common/Loader";
 import { LayoutProp } from "@/interfaces/interfaces";
 
 const Layout = ({ children }: LayoutProp) => {

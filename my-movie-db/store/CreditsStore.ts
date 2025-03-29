@@ -1,16 +1,9 @@
-import { Details } from "@/interfaces/interfaces";
+import { DetailsStore } from "@/interfaces/interfaces";
 import {
   fetchMoviesCredits,
   fetchTvSeriesCredits,
 } from "@/services/creditsService";
 import { create } from "zustand";
-
-interface DetailsStore {
-  credits: Details | null;
-  loading: boolean;
-  error: string | null;
-  getCredits: (type: "movie" | "tv", id: number) => Promise<void>;
-}
 
 export const useCreditsStore = create<DetailsStore>((set) => ({
   credits: null,

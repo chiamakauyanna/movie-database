@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useDetailsStore } from "@/store/DetailsStore";
-import { useCreditsStore } from "@/store/CreditsStore";
+import { useDetailsStore } from "@/store/detailsStore";
+import { useCreditsStore } from "@/store/creditsStore";
 
 const useDetails = (type: "movie" | "tv") => {
   const router = useRouter();
@@ -11,6 +11,8 @@ const useDetails = (type: "movie" | "tv") => {
   const getDetails = useDetailsStore((state) => state.getDetails);
   const credits = useCreditsStore((state) => state.credits);
   const getCredits = useCreditsStore((state) => state.getCredits);
+   const loading = useDetailsStore((state) => state.loading);
+    const error = useDetailsStore((state) => state.error);
 
   useEffect(() => {
     if (!id) return;
@@ -21,6 +23,8 @@ const useDetails = (type: "movie" | "tv") => {
   return {
     details,
     credits,
+    loading,
+    error,
   };
 };
 

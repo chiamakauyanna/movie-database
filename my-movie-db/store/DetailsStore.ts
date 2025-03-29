@@ -1,16 +1,9 @@
-import { Details } from "@/interfaces/interfaces";
+import { DetailsStore } from "@/interfaces/interfaces";
 import {
   fetchMoviesDetails,
   fetchTvSeriesDetails,
-} from "@/services/DetailsService";
+} from "@/services/detailsService";
 import { create } from "zustand";
-
-interface DetailsStore {
-  details: Details | null;
-  loading: boolean;
-  error: string | null;
-  getDetails: (type: "movie" | "tv", id: number) => Promise<void>;
-}
 
 export const useDetailsStore = create<DetailsStore>((set) => ({
   details: null,
