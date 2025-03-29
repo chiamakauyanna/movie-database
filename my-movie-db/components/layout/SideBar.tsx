@@ -23,9 +23,9 @@ const SideBar = () => {
 
   return (
     <div
-      className={`fixed bg-background h-screen transform transition-transform duration-500 ease-out
+      className={`flex-initial fixed bg-background h-screen transform transition-transform duration-500 ease-out
     ${toggle ? "translate-x-0" : "-translate-x-full"} 
-    lg:relative md:relative lg:translate-x-0 md:translate-x-0 w-52`}
+    lg:relative md:relative lg:translate-x-0 md:translate-x-0 lg:w-lg md:w-md w-52`}
     >
       <div className="flex items-center justify-around pt-12">
         <Logo />
@@ -37,14 +37,14 @@ const SideBar = () => {
         </div>
       </div>
 
-      <ul className="text-gray-500 flex flex-col gap-8 mt-20">
+      <ul className="text-gray-400 flex flex-col gap-8 mt-20">
         {menuItems.map((item, index) => {
           const isActive = router.pathname === item.route;
 
           return (
             <li
               key={index}
-              className={`ml-8 font-bold text-md flex items-center gap-4 transition duration-100 ease-in-out 
+              className={`ml-8 font-bold text-md flex items-center gap-4 transition duration-100 ease-in-out lg:text-base md:text-sm text-sm
                 ${isActive ? "text-accent" : "hover:text-accent"}`}
             >
               {item.icon}

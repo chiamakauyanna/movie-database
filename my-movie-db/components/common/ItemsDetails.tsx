@@ -56,7 +56,7 @@ const ItemsDetails = (props: Details) => {
 
             {props.vote_average !== undefined && (
               <p className="bg-accent py-2 rounded w-48 text-center px-2">
-                Rating - {props.vote_average.toFixed(1)}
+                Rating - {props.vote_average ? props.vote_average.toFixed(1)  : "N/A"}
               </p>
             )}
 
@@ -116,7 +116,7 @@ const ItemsDetails = (props: Details) => {
 
             {props.revenue !== undefined && (
               <p className="text-accent mt-2">
-                Revenue - ${props.revenue.toLocaleString()}
+                Revenue - ${props.revenue ? props.revenue.toLocaleString() : "N/A"}
               </p>
             )}
 

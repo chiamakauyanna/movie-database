@@ -3,10 +3,10 @@ import axios from "axios";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
-export const fetchFromAPI = async (endpoint: string) => {
+export const fetchFromAPI = async (endpoint: string, page: number) => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/${endpoint}?api_key=${API_KEY}`
+      `${BASE_URL}/${endpoint}?api_key=${API_KEY}&page=${page}`
     );
     return response.data.results;
   } catch (error) {
@@ -20,8 +20,9 @@ export const fetchFromAPI = async (endpoint: string) => {
 };
 
 
-export const fetchTvSeries = () => fetchFromAPI('discover/tv')
-export const fetchAiringTvSeries = () => fetchFromAPI('tv/airing_today');
-export const fetchOnAirTvSeries = () => fetchFromAPI('tv/on_the_air')
-export const fetchTopRatedTvSeries = () => fetchFromAPI('tv/top_rated')
-export const fetchPopularTvSeries = () => fetchFromAPI('tv/popular')
+export const fetchTvSeries = (page: number) => fetchFromAPI('discover/tv', page)
+export const fetchAiringTvSeries = (page: number) => fetchFromAPI('tv/airing_today', page);
+export const fetchOnAirTvSeries = (page: number) => fetchFromAPI('tv/on_the_air', page);
+export const fetchTopRatedTvSeries = (page: number) => fetchFromAPI('tv/top_rated', page);
+export const fetchPopularTvSeries = (page: number) => fetchFromAPI('tv/popular', page);
+export const fetchTrendingTvSeries = (page: number) => fetchFromAPI("trending/tv/day", page);

@@ -7,8 +7,8 @@ const Header = () => {
 
   
   return (
-    <header className="flex lg:justify-center md:justify-center justify-around mb-6 py-9 items-center">
-      <div onClick={() => setToggle(true)} className="lg:hidden md:hidden flex text-accent">
+    <header className="flex lg:justify-center md:justify-center justify-around gap-6 mb-6 py-9 items-center">
+      <div onClick={() => setToggle(true)} className="lg:hidden md:hidden flex text-accent ml-4">
         <RiMenu2Fill size={24}/>  
       </div>
       <SearchBar />

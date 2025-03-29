@@ -19,16 +19,30 @@ export interface Movie {
 }
 
 export interface MovieState {
+  loadMorePopularMovies: () => void;
+  loadMoreTopRatedMovies: () => void;
+  loadMoreUpcomingMovies: () => void;
+  loadMoreTrendingMovies: () => void;
+  loadMoreMovies: () => void;
   movie: Movie[];
   popularMovies: Movie[];
   topRatedMovies: Movie[];
   upcomingMovies: Movie[];
+  trendingMovies: Movie[];
   loading: boolean;
   error: string | null;
-  getMovies?: () => Promise<void>;
-  getPopularMovies?: () => Promise<void>;
-  getUpcomingMovies?: () => Promise<void>;
-  getTopRatedMovies?: () => Promise<void>;
+  currentPage: {
+    movies: number;
+    popular: number;
+    topRated: number;
+    upcoming: number;
+    trending: number;
+  };
+  getMovies?: (page: number) => Promise<void>;
+  getPopularMovies?: (page: number) => Promise<void>;
+  getUpcomingMovies?: (page: number) => Promise<void>;
+  getTopRatedMovies?: (page: number) => Promise<void>;
+  getTrendingMovies?: (page: number) => Promise<void>;
 }
 
 /** ====== TV Series Interfaces ====== */
@@ -46,18 +60,34 @@ export interface Tv {
 }
 
 export interface TvState {
+  loadMorePopularTv: () => void;
+  loadMoreTopRatedTv: () => void;
+  loadMoreOnAirTv: () => void;
+  loadMoreAiringTv: () => void;
+  loadMoreTrendingTv: () => void;
+  loadMoreTv: () => void;
   tv: Tv[];
   popularTvSeries: Tv[];
   topRatedTvSeries: Tv[];
   airingTvSeries: Tv[];
   onAirTvSeries: Tv[];
+  trendingTvSeries: Tv[];
   loading: boolean;
   error: string | null;
-  getTvSeries?: () => Promise<void>;
-  getPopularTvSeries?: () => Promise<void>;
-  getAiringTvSeries?: () => Promise<void>;
-  getTopRatedTvSeries?: () => Promise<void>;
-  getOnAirTvSeries?: () => Promise<void>;
+  currentPage: {
+    tv: number;
+    popular: number;
+    topRated: number;
+    onAir: number;
+    airing: number;
+    trending: number;
+  };
+  getTvSeries?: (page: number) => Promise<void>;
+  getPopularTvSeries?: (page: number) => Promise<void>;
+  getAiringTvSeries?: (page: number) => Promise<void>;
+  getTopRatedTvSeries?: (page: number) => Promise<void>;
+  getOnAirTvSeries?: (page: number) => Promise<void>;
+  getTrendingTvSeries?: (page: number) => Promise<void>;
 }
 
 /** ====== Movie & TV Details Interfaces ====== */
